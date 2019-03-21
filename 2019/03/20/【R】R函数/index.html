@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="总结R中使用过的函数的语法。">
+<meta name="keywords" content="R,数据处理与表达">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R中的函数">
+<meta property="og:url" content="http://yoursite.com/2019/03/20/【R】R函数/index.html">
+<meta property="og:site_name" content="absurdmemento&#39;s Blog">
+<meta property="og:description" content="总结R中使用过的函数的语法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6310069-80096f1109ec95e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/860">
+<meta property="og:updated_time" content="2019-03-20T13:39:10.051Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="R中的函数">
+<meta name="twitter:description" content="总结R中使用过的函数的语法。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6310069-80096f1109ec95e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/860">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/20/【R】R函数/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>R中的函数 | absurdmemento's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+  
+  
+  <style>
+.post-title, h1,h2
+{
+	font-family: "constantia","Segeo UI Mono","Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","Droid Sans Fallback","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp",Sans;
+
+	
+	}
+
+.post-title  .post-title-link  /*<!--原来要这么玩 --> */
+{
+font-family: "constantia","Segeo UI Mono","Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","Droid Sans Fallback","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp",Sans;
+
+color:#ef457e;
+
+/*
+margin: 20px 0 20px;
+
+float:left*/
+}
+/*
+article,.post-block,.post post-type-normal
+*/
+
+
+#posts > article + article .post-block
+{
+background-color: #ffffff;
+
+border-radius: 14px;
+
+margin: 20px 0 20px;
+
+margin-top: 50px;
+}
+#posts > article + article .post-block:hover {
+    box-shadow: 0 5px 50px 5px rgba(250,250,250,.6);
+}
+.post-block{ padding: 40px;border-radius: 14px;;}
+#content {padding: 40px;}
+
+.pagination {
+
+    background: #c18d5f;
+	
+	box-shadow: none;
+
+}
+
+
+.posts-expand .post-title-link::before {
+
+    background-color: #459fed; //#533fa9;
+
+}
+
+
+.btn
+{
+background-color: #99ebed; //#459fed;
+color: white;
+border: 0px;
+}
+
+.post-meta
+{
+color: green;
+}
+.posts-expand .post-meta {
+    color: green;
+}
+
+a span
+{ color:#ecc656; }
+</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN" style="background-color:#c18d5f; ">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">absurdmemento's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/【R】R函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="秋枫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="absurdmemento's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">R中的函数
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-20 16:45:45" itemprop="dateCreated datePublished" datetime="2019-03-20T16:45:45+08:00">2019-03-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-20 21:39:10" itemprop="dateModified" datetime="2019-03-20T21:39:10+08:00">2019-03-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据处理与表达/" itemprop="url" rel="index"><span itemprop="name">数据处理与表达</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">4.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/6310069-80096f1109ec95e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/860" alt><br>总结R中使用过的函数的语法。<br><a id="more"></a></p>
+<h3 id="A"><a href="#A" class="headerlink" title="A"></a>A</h3><h4 id="a1"><a href="#a1" class="headerlink" title="a1"></a>a1</h4><h3 id="B"><a href="#B" class="headerlink" title="B"></a>B</h3><h4 id="b1"><a href="#b1" class="headerlink" title="b1"></a>b1</h4><h3 id="P"><a href="#P" class="headerlink" title="P"></a>P</h3><h4 id="paste"><a href="#paste" class="headerlink" title="paste"></a>paste</h4><h5 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h5><p>paste (…, sep = “ “, collapse = NULL)<br>paste0(…, collapse = NULL)</p>
+<h5 id="Arguments-参数"><a href="#Arguments-参数" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>…<br>one or more R objects, to be converted to character vectors.<br>字符向量，用“,”分隔</li>
+<li>sep<br>a character string to separate the terms. Not NA_character_.<br>用于分割的字符串</li>
+<li>collapse<br>an optional character string to separate the results. Not NA_character_.<br>连接符</li>
+</ul>
+<h5 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h5><p>会将传入的n个向量进行连接，连接次数以向量中分量最多的向量为准，其它向量则循环使用。<br>sep用来分隔（连接）分量，collapse用来将连接后的分量进行连接为一个字符串。<br>比如一个向量为（a,b,c,d），另一个向量为（1,2,3），还有（1）。<br>则连接次数为4。<br>（1，2，3）则循环为：1，2，3，1<br>（1）则循环为：1，1，1，1<br>如果不设置参数，则为：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; paste(c(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>),c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),<span class="number">1</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"a 1 1"</span> <span class="string">"b 2 1"</span> <span class="string">"c 3 1"</span> <span class="string">"d 1 1"</span></span><br></pre></td></tr></table></figure></p>
+<p>如果设置参数，比如sep=‘_’，则：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; paste(c(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>),c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),<span class="number">1</span>,sep = <span class="string">'_'</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"a_1_1"</span> <span class="string">"b_2_1"</span> <span class="string">"c_3_1"</span> <span class="string">"d_1_1"</span></span><br></pre></td></tr></table></figure></p>
+<p>如果设置参数，比如sep=‘_’，collapse=’&amp;’则：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; paste(c(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>),c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),<span class="number">1</span>,sep = <span class="string">'_'</span>,collapse=<span class="string">'&amp;'</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"a_1_1&amp;b_2_1&amp;c_3_1&amp;d_1_1"</span></span><br></pre></td></tr></table></figure></p>
+<h6 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h6><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; paste(<span class="string">'one'</span>,<span class="number">2</span>,<span class="string">'three'</span>,<span class="number">4</span>,<span class="string">'five'</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"one 2 three 4 five"</span></span><br><span class="line">&gt; paste(<span class="string">'X'</span>,<span class="number">1</span>:<span class="number">5</span>,sep=<span class="string">''</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"X1"</span> <span class="string">"X2"</span> <span class="string">"X3"</span> <span class="string">"X4"</span> <span class="string">"X5"</span></span><br><span class="line">&gt; paste(c(<span class="string">'one'</span>,<span class="string">'two'</span>,<span class="string">'three'</span>,<span class="string">'four'</span>),collapse=<span class="string">' and '</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"one and two and three and four"</span></span><br><span class="line">&gt; paste(c(<span class="string">'X'</span>,<span class="string">'Y'</span>),<span class="number">1</span>:<span class="number">5</span>,sep=<span class="string">'_'</span>,collapse=<span class="string">' and '</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"X_1 and Y_2 and X_3 and Y_4 and X_5"</span></span><br><span class="line">&gt; paste(<span class="number">1</span>:<span class="number">5</span>,<span class="number">6</span>:<span class="number">9</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"1 6"</span> <span class="string">"2 7"</span> <span class="string">"3 8"</span> <span class="string">"4 9"</span> <span class="string">"5 6"</span></span><br><span class="line">&gt; paste(<span class="number">1</span>:<span class="number">5</span>,<span class="number">6</span>:<span class="number">9</span>,<span class="number">10</span>:<span class="number">11</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"1 6 10"</span> <span class="string">"2 7 11"</span> <span class="string">"3 8 10"</span> <span class="string">"4 9 11"</span> <span class="string">"5 6 10"</span></span><br><span class="line">&gt; paste(<span class="number">1</span>:<span class="number">2</span>,<span class="number">6</span>:<span class="number">9</span>,<span class="number">10</span>:<span class="number">11</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"1 6 10"</span> <span class="string">"2 7 11"</span> <span class="string">"1 8 10"</span> <span class="string">"2 9 11"</span></span><br><span class="line">&gt; paste(<span class="number">1</span>:<span class="number">2</span>,<span class="number">6</span>:<span class="number">9</span>,sep=<span class="string">'_'</span>,collapse=<span class="string">' and '</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"1_6 and 2_7 and 1_8 and 2_9"</span></span><br><span class="line">&gt; paste(<span class="number">1</span>:<span class="number">2</span>,<span class="number">6</span>:<span class="number">9</span>,<span class="number">10</span>:<span class="number">11</span>,sep=<span class="string">'_'</span>,collapse=<span class="string">' and '</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"1_6_10 and 2_7_11 and 1_8_10 and 2_9_11"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h3><h4 id="函数：q1"><a href="#函数：q1" class="headerlink" title="函数：q1"></a>函数：q1</h4><h5 id="Usage-1"><a href="#Usage-1" class="headerlink" title="Usage"></a>Usage</h5><p>rep(x, …)<br>rep.int(x, times)<br>rep_len(x, length.out)</p>
+<h5 id="Arguments-参数-1"><a href="#Arguments-参数-1" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x<br>a vector (of any mode including a list) or a factor or (for rep only) a POSIXct or POSIXlt or Date object; or an S4 object containing such an object.</li>
+<li>…<br>further arguments to be passed to or from other methods. For the internal default method these can include:<br>times<br>an integer-valued vector giving the (non-negative) number of times to repeat each element if of length length(x), or to repeat the whole vector if of length 1. Negative or NA values are an error. A double vector is accepted, other inputs being coerced to an integer or double vector.<br>length.out<br>non-negative integer. The desired length of the output vector. Other inputs will be coerced to a double vector and the first element taken. Ignored if NA or invalid.<br>each<br>non-negative integer. Each element of x is repeated each times. Other inputs will be coerced to an integer or double vector and the first element taken. Treated as 1 if NA or invalid.</li>
+<li>times, length.out<br>see … above</li>
+</ul>
+<h5 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-1"><a href="#Examples-1" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/rep" target="_blank" rel="noopener">官网简介</a></p>
+<h3 id="R"><a href="#R" class="headerlink" title="R"></a>R</h3><h4 id="函数：rep"><a href="#函数：rep" class="headerlink" title="函数：rep"></a>函数：rep</h4><h5 id="Usage-2"><a href="#Usage-2" class="headerlink" title="Usage"></a>Usage</h5><p>rep(x, …)<br>rep.int(x, times)<br>rep_len(x, length.out)</p>
+<h5 id="Arguments-参数-2"><a href="#Arguments-参数-2" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x</li>
+<li>…<br>times：each处理后的重复次数<br>len：总分量个数<br>each：每个重复多少次</li>
+<li>times, length.out</li>
+</ul>
+<h5 id="说明-2"><a href="#说明-2" class="headerlink" title="说明"></a>说明</h5><p>依次把值赋值给 times -&gt; len -&gt; each<br>作用的优先级是 len &gt; times &gt; each<br>即先each生成一个向量，然后times处理后生成一个向量，最后len处理得到最终的向量</p>
+<h5 id="Examples-2"><a href="#Examples-2" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">rep(2:5, 2) </span><br><span class="line">rep(2:5, 2,2,2,2)</span><br><span class="line"></span><br><span class="line">rep(2:5, 2,2,2)</span><br><span class="line"># 依次把值赋值给 times -&gt; len -&gt; each</span><br><span class="line"># 作用的优先级是 len &gt; times &gt; each</span><br><span class="line"># 即先each生成一个向量，然后times处理后生成一个向量，最后len处理得到最终的向量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># NOT RUN &#123;</span><br><span class="line">rep(1:4, 2)</span><br><span class="line">rep(1:4, each = 2, len = 4)       # not the same.</span><br><span class="line">rep(1:4, c(2,2,2,2), len = 4)     # same as second.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">rep(1:4, c(2,1,2,1), len = 4)</span><br><span class="line"></span><br><span class="line">rep(1:4, each = 2, len = 4)    # first 4 only.</span><br><span class="line">rep(1:4, each = 2, len = 10)   # 8 integers plus two recycled 1&apos;s.</span><br><span class="line">rep(1:4, each = 2, times = 3)  # length 24, 3 complete replications</span><br><span class="line">rep(1:4, each = 2, times = 3,len =10)  # length 24, 3 complete replications</span><br><span class="line"></span><br><span class="line">rep(1, 40*(1-.8)) # length 7 on most platforms</span><br><span class="line">rep(1, 40*(1-.8)+1e-7) # better</span><br><span class="line"></span><br><span class="line">## replicate a list</span><br><span class="line">fred &lt;- list(happy = 1:10, name = &quot;squash&quot;)</span><br><span class="line">rep(fred, 5)</span><br><span class="line"></span><br><span class="line"># date-time objects</span><br><span class="line">x &lt;- .leap.seconds[1:3]</span><br><span class="line">rep(x, 2)</span><br><span class="line">rep(as.POSIXlt(x), rep(2, 3))</span><br><span class="line"></span><br><span class="line">## named factor</span><br><span class="line">x &lt;- factor(LETTERS[1:4]); names(x) &lt;- letters[1:4]</span><br><span class="line">x</span><br><span class="line">rep(x, 2)</span><br><span class="line">rep(x, each = 2)</span><br><span class="line">rep.int(x, 2)  # no names</span><br><span class="line">rep_len(x, 10)</span><br><span class="line"># &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/rep" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+<h3 id="S"><a href="#S" class="headerlink" title="S"></a>S</h3><h4 id="函数："><a href="#函数：" class="headerlink" title="函数："></a>函数：</h4><h5 id="Usage-3"><a href="#Usage-3" class="headerlink" title="Usage"></a>Usage</h5><h5 id="Arguments-参数-3"><a href="#Arguments-参数-3" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><h5 id="说明-3"><a href="#说明-3" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-3"><a href="#Examples-3" class="headerlink" title="Examples"></a>Examples</h5><hr>
+<h3 id="T"><a href="#T" class="headerlink" title="T"></a>T</h3><h4 id="函数：-1"><a href="#函数：-1" class="headerlink" title="函数："></a>函数：</h4><h6 id="Usage-4"><a href="#Usage-4" class="headerlink" title="Usage"></a>Usage</h6><p>paste (…, sep = “ “, collapse = NULL)<br>paste0(…, collapse = NULL)</p>
+<h6 id="Arguments-参数-4"><a href="#Arguments-参数-4" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h6><ul>
+<li>…<br>one or more R objects, to be converted to character vectors.<br>字符向量，用“,”分隔</li>
+<li>sep<br>a character string to separate the terms. Not NA_character_.<br>用于分割的字符串</li>
+<li>collapse<br>an optional character string to separate the results. Not NA_character_.<br>连接符<h6 id="说明-4"><a href="#说明-4" class="headerlink" title="说明"></a>说明</h6></li>
+</ul>
+<p>如果不设置参数，则为：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>如果设置参数，比如sep=‘_’，则：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>如果设置参数，比如sep=‘_’，collapse=’&amp;’则：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h6 id="Examples-4"><a href="#Examples-4" class="headerlink" title="Examples"></a>Examples</h6><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
+          
+            <a href="/tags/数据处理与表达/" rel="tag"><i class="fa fa-tag"></i> 数据处理与表达</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/19/【R】开始使用R/" rel="next" title="开始使用R">
+                <i class="fa fa-chevron-left"></i> 开始使用R
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/20/【R】R包/" rel="prev" title="R中的包">
+                R中的包 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">秋枫</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#A"><span class="nav-number">1.</span> <span class="nav-text">A</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a1"><span class="nav-number">1.1.</span> <span class="nav-text">a1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B"><span class="nav-number">2.</span> <span class="nav-text">B</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#b1"><span class="nav-number">2.1.</span> <span class="nav-text">b1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P"><span class="nav-number">3.</span> <span class="nav-text">P</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#paste"><span class="nav-number">3.1.</span> <span class="nav-text">paste</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage"><span class="nav-number">3.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数"><span class="nav-number">3.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明"><span class="nav-number">3.1.3.</span> <span class="nav-text">说明</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Examples"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q"><span class="nav-number">4.</span> <span class="nav-text">Q</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：q1"><span class="nav-number">4.1.</span> <span class="nav-text">函数：q1</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-1"><span class="nav-number">4.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-1"><span class="nav-number">4.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-1"><span class="nav-number">4.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-1"><span class="nav-number">4.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R"><span class="nav-number">5.</span> <span class="nav-text">R</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：rep"><span class="nav-number">5.1.</span> <span class="nav-text">函数：rep</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-2"><span class="nav-number">5.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-2"><span class="nav-number">5.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-2"><span class="nav-number">5.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-2"><span class="nav-number">5.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S"><span class="nav-number">6.</span> <span class="nav-text">S</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数："><span class="nav-number">6.1.</span> <span class="nav-text">函数：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-3"><span class="nav-number">6.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-3"><span class="nav-number">6.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-3"><span class="nav-number">6.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-3"><span class="nav-number">6.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T"><span class="nav-number">7.</span> <span class="nav-text">T</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：-1"><span class="nav-number">7.1.</span> <span class="nav-text">函数：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Usage-4"><span class="nav-number">7.1.0.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Arguments-参数-4"><span class="nav-number">7.1.0.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#说明-4"><span class="nav-number">7.1.0.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Examples-4"><span class="nav-number">7.1.0.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qiu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">13k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">12 分钟</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 新增访客统计代码 -->
+
+<div class="busuanzi-count">
+    <script async src="/qiu/busuanzi.pure.mini.js"></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问用户： <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+    <div class="powered-by"></div>
+    <span class="site-uv">
+      <i class="fa fa-eye"></i>
+      访问次数： <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span>
+    <!-- 博客字数统计 -->
+    
+</div>
+<!-- 新增访客统计代码 END-->
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+
+	<!-- 点击特效 -->
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="/qiu/js/fireworks/anime.min.js"></script> 
+   <script type="text/javascript" src="/qiu/js/fireworks/fireworks.js"></script><!-- 就是点击特效的 -->
+   
+ 
+	<!-- 看板娘 --> 
+   <script type="text/javascript" src="/qiu/kanbanliang/script.js"></script>
+<canvas id="live2dcanvas" width="150" height="300" class="live2d" style="visibility: visible;"></canvas>
+<style> #live2dcanvas { right:-20px!important;}</style>
+<style>
+      #live2dcanvas {
+        position: fixed;
+        //right: 0px;
+		left: 250px;
+        z-index: 999;
+        pointer-events: none;
+        bottom: -30px;
+      }
+    </style>
+    <script>loadlive2d("live2dcanvas" ,"/qiu/kanbanliang/koharu.model.json")</script> 
+	
+	
+	
+</html>
