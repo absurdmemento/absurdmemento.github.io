@@ -96,27 +96,22 @@
 
 
 
-  <meta name="description" content="什么是R语言？  R语言，一种自由软件编程语言与操作环境，主要用于统计分析、绘图、数据挖掘。R本来是由来自新西兰奥克兰大学的罗斯·伊哈卡和罗伯特·杰特曼开发（也因此称为R），现在由“R开发核心团队”负责开发。R基于S语言的一个GNU计划项目，所以也可以当作S语言的一种实现，通常用S语言编写的代码都可以不作修改的在R环境下运行。R的语法是来自Scheme。">
-<meta name="keywords" content="R,数据处理与表达">
+  <meta name="keywords" content="R,数据处理与表达">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初识R">
-<meta property="og:url" content="http://yoursite.com/2019/03/19/【R】了解/index.html">
+<meta property="og:title" content="R中的向量、list等">
+<meta property="og:url" content="http://yoursite.com/2019/03/31/【R】R中向量、list、矩阵、数据框/index.html">
 <meta property="og:site_name" content="absurdmemento&#39;s Blog">
-<meta property="og:description" content="什么是R语言？  R语言，一种自由软件编程语言与操作环境，主要用于统计分析、绘图、数据挖掘。R本来是由来自新西兰奥克兰大学的罗斯·伊哈卡和罗伯特·杰特曼开发（也因此称为R），现在由“R开发核心团队”负责开发。R基于S语言的一个GNU计划项目，所以也可以当作S语言的一种实现，通常用S语言编写的代码都可以不作修改的在R环境下运行。R的语法是来自Scheme。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6310069-ddd9bb934863df63.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/200">
-<meta property="og:updated_time" content="2019-03-19T02:04:53.850Z">
+<meta property="og:updated_time" content="2019-03-31T07:28:55.126Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初识R">
-<meta name="twitter:description" content="什么是R语言？  R语言，一种自由软件编程语言与操作环境，主要用于统计分析、绘图、数据挖掘。R本来是由来自新西兰奥克兰大学的罗斯·伊哈卡和罗伯特·杰特曼开发（也因此称为R），现在由“R开发核心团队”负责开发。R基于S语言的一个GNU计划项目，所以也可以当作S语言的一种实现，通常用S语言编写的代码都可以不作修改的在R环境下运行。R的语法是来自Scheme。">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6310069-ddd9bb934863df63.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/200">
+<meta name="twitter:title" content="R中的向量、list等">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/19/【R】了解/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/31/【R】R中向量、list、矩阵、数据框/">
 
 
 
@@ -126,7 +121,7 @@
   };
 </script>
 
-  <title>初识R | absurdmemento's Blog</title>
+  <title>R中的向量、list等 | absurdmemento's Blog</title>
   
 
 
@@ -402,7 +397,7 @@ a span
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/【R】了解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/【R】R中向量、list、矩阵、数据框/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="秋枫">
@@ -419,7 +414,7 @@ a span
 
         
         
-          <h1 class="post-title" itemprop="name headline">初识R
+          <h1 class="post-title" itemprop="name headline">R中的向量、list等
 
               
             
@@ -445,7 +440,7 @@ a span
                 
               
 
-              <time title="创建时间：2019-03-19 09:28:53" itemprop="dateCreated datePublished" datetime="2019-03-19T09:28:53+08:00">2019-03-19</time>
+              <time title="创建时间：2019-03-31 15:25:46" itemprop="dateCreated datePublished" datetime="2019-03-31T15:25:46+08:00">2019-03-31</time>
             
 
             
@@ -462,7 +457,7 @@ a span
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-19 10:04:53" itemprop="dateModified" datetime="2019-03-19T10:04:53+08:00">2019-03-19</time>
+                <time title="修改时间：2019-03-31 15:28:55" itemprop="dateModified" datetime="2019-03-31T15:28:55+08:00">2019-03-31</time>
               
             
           </span>
@@ -508,7 +503,7 @@ a span
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">714</span>
+                <span title="本文字数">46</span>
               
 
               
@@ -542,21 +537,10 @@ a span
       
 
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/6310069-ddd9bb934863df63.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/200" alt></p>
-<h5 id="什么是R语言？"><a href="#什么是R语言？" class="headerlink" title="什么是R语言？"></a>什么是R语言？</h5><p><hr></p>
-<blockquote>
-<p>R语言，一种自由软件编程语言与操作环境，主要用于统计分析、绘图、数据挖掘。R本来是由来自新西兰奥克兰大学的罗斯·伊哈卡和罗伯特·杰特曼开发（也因此称为R），现在由“R开发核心团队”负责开发。R基于S语言的一个GNU计划项目，所以也可以当作S语言的一种实现，通常用S语言编写的代码都可以不作修改的在R环境下运行。R的语法是来自Scheme。<br><a id="more"></a><br>R的源代码可自由下载使用，亦有已编译的可执行文件版本可以下载，可在多种平台下运行，包括UNIX（也包括FreeBSD和Linux）、Windows和MacOS。R主要是以命令行操作，同时有人开发了几种图形用户界面，其中RStudio是最为广泛使用的IDE。</p>
-</blockquote>
-<hr>
-
-<h5 id="R语言主要用于那些环境？"><a href="#R语言主要用于那些环境？" class="headerlink" title="R语言主要用于那些环境？"></a>R语言主要用于那些环境？</h5><p><hr></p>
-<blockquote>
-<p>R内置多种统计学及数字分析功能。R的功能也可以透过安装包（Packages，用户撰写的功能）增强。因为S的血缘，R比其他统计学或数学专用的编程语言有更强的面向对象（面向对象程序设计, S3, S4等）功能。<br>R的另一强项是绘图功能，制图具有印刷的素质，也可加入数学符号。<br>虽然R主要用于统计分析或者开发统计相关的软件，但也有人用作矩阵计算。其分析速度可媲美专用于矩阵计算的自由软件GNU Octave和商业软件MATLAB</p>
-</blockquote>
-<blockquote>
-<p>R的功能能够透过由用户撰写的包增强。增加的功能有特殊的统计技术、绘图功能，以及编程接口和数据输出／输入功能。这些软件包是由R语言、LaTeX、Java及最常用C语言和Fortran撰写。下载的可执行文件版本会连同一批核心功能的软件包，而根据CRAN纪录有七千多种不同的软件包。其中有几款较为常用，例如用于经济计量、财经分析、人文科学研究以及人工智能。</p>
-</blockquote>
-<hr>
+        <p><img src alt></p>
+<a id="more"></a>
+<p><a href="https://www.zhihu.com/question/23119559" target="_blank" rel="noopener">source1</a><br><a href="http://www.voidcn.com/article/p-drctjstt-zg.html" target="_blank" rel="noopener">source2</a>：<br><a href="http://www.10tiao.com/html/406/201605/2247483677/1.html" target="_blank" rel="noopener">source3</a>：<br><a href="https://blog.csdn.net/stat_elliott/article/details/41678847" target="_blank" rel="noopener">source4</a><br><a href>source5</a></p>
+<h3 id="S"><a href="#S" class="headerlink" title="S"></a>S</h3><h4 id="sqldf"><a href="#sqldf" class="headerlink" title="sqldf"></a>sqldf</h4>
       
     </div>
 
@@ -594,8 +578,8 @@ a span
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/19/00 模板/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2019/03/23/Linux/【linux】安装软件的方式/" rel="next" title="Linux软件安装方式">
+                <i class="fa fa-chevron-left"></i> Linux软件安装方式
               </a>
             
           </div>
@@ -604,8 +588,8 @@ a span
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/19/【R】开始使用R/" rel="prev" title="开始使用R">
-                开始使用R <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/31/【R】R中的一些概念/" rel="prev" title="R中的一些概念">
+                R中的一些概念 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -765,7 +749,7 @@ a span
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#什么是R语言？"><span class="nav-number">1.</span> <span class="nav-text">什么是R语言？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#R语言主要用于那些环境？"><span class="nav-number">2.</span> <span class="nav-text">R语言主要用于那些环境？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#S"><span class="nav-number">1.</span> <span class="nav-text">S</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sqldf"><span class="nav-number">1.1.</span> <span class="nav-text">sqldf</span></a></li></ol></li></ol></div>
             
 
           </div>
