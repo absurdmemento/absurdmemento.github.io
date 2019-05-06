@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="去除NA值https://bbs.pinggu.org/thread-5658799-1-1.htmlhttps://www.jianshu.com/p/7ff92d673b42http://blog.sina.com.cn/s/blog_13b7ba9b00102x42m.htmlhttps://www.cnblogs.com/liu-304711/p/7552180.html 已知经纬度求两点">
+<meta name="keywords" content="R,数据处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R中的一些问题的解决">
+<meta property="og:url" content="http://yoursite.com/2019/04/11/R/Q & A/index.html">
+<meta property="og:site_name" content="absurdmemento&#39;s Blog">
+<meta property="og:description" content="去除NA值https://bbs.pinggu.org/thread-5658799-1-1.htmlhttps://www.jianshu.com/p/7ff92d673b42http://blog.sina.com.cn/s/blog_13b7ba9b00102x42m.htmlhttps://www.cnblogs.com/liu-304711/p/7552180.html 已知经纬度求两点">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-11T07:03:52.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="R中的一些问题的解决">
+<meta name="twitter:description" content="去除NA值https://bbs.pinggu.org/thread-5658799-1-1.htmlhttps://www.jianshu.com/p/7ff92d673b42http://blog.sina.com.cn/s/blog_13b7ba9b00102x42m.htmlhttps://www.cnblogs.com/liu-304711/p/7552180.html 已知经纬度求两点">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/11/R/Q & A/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>R中的一些问题的解决 | absurdmemento's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+  
+  
+  <style>
+.post-title, h1,h2
+{
+	font-family: "constantia","Segeo UI Mono","Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","Droid Sans Fallback","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp",Sans;
+
+	
+	}
+
+.post-title  .post-title-link  /*<!--原来要这么玩 --> */
+{
+font-family: "constantia","Segeo UI Mono","Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","Droid Sans Fallback","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp",Sans;
+
+color:#ef457e;
+
+/*
+margin: 20px 0 20px;
+
+float:left*/
+}
+/*
+article,.post-block,.post post-type-normal
+*/
+
+
+#posts > article + article .post-block
+{
+background-color: #ffffff;
+
+border-radius: 14px;
+
+margin: 20px 0 20px;
+
+margin-top: 50px;
+}
+#posts > article + article .post-block:hover {
+    box-shadow: 0 5px 50px 5px rgba(250,250,250,.6);
+}
+.post-block{ padding: 40px;border-radius: 14px;;}
+#content {padding: 40px;}
+
+.pagination {
+
+    background: #c18d5f;
+	
+	box-shadow: none;
+
+}
+
+
+.posts-expand .post-title-link::before {
+
+    background-color: #459fed; //#533fa9;
+
+}
+
+
+.btn
+{
+background-color: #99ebed; //#459fed;
+color: white;
+border: 0px;
+}
+
+.post-meta
+{
+color: green;
+}
+.posts-expand .post-meta {
+    color: green;
+}
+
+a span
+{ color:#ecc656; }
+</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN" style="background-color:#c18d5f; ">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">absurdmemento's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/R/Q & A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="秋枫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="absurdmemento's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">R中的一些问题的解决
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-11 10:57:23" itemprop="dateCreated datePublished" datetime="2019-04-11T10:57:23+08:00">2019-04-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-11 15:03:52" itemprop="dateModified" datetime="2019-04-11T15:03:52+08:00">2019-04-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="去除NA值"><a href="#去除NA值" class="headerlink" title="去除NA值"></a>去除NA值</h4><p><a href="https://bbs.pinggu.org/thread-5658799-1-1.html" target="_blank" rel="noopener">https://bbs.pinggu.org/thread-5658799-1-1.html</a><br><a href="https://www.jianshu.com/p/7ff92d673b42" target="_blank" rel="noopener">https://www.jianshu.com/p/7ff92d673b42</a><br><a href="http://blog.sina.com.cn/s/blog_13b7ba9b00102x42m.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_13b7ba9b00102x42m.html</a><br><a href="https://www.cnblogs.com/liu-304711/p/7552180.html" target="_blank" rel="noopener">https://www.cnblogs.com/liu-304711/p/7552180.html</a></p>
+<h4 id="已知经纬度求两点间地理距离"><a href="#已知经纬度求两点间地理距离" class="headerlink" title="已知经纬度求两点间地理距离"></a>已知经纬度求两点间地理距离</h4><p>用低精度和高精度两种方法解答，两种方法的区别在于，低精度将地球看作球形，高精度将地球看作椭球。首先将经纬度转换成十进制的度。 – <a href="http://blog.sciencenet.cn/blog-255662-365318.html" target="_blank" rel="noopener">自定义方法实现</a><br>根据经纬度计算国内两个地点之间的距离 – <a href="https://www.cnblogs.com/fanyongbin/p/5000791.html" target="_blank" rel="noopener">调用百度API</a><br><a href="https://my.oschina.net/u/727594/blog/190095" target="_blank" rel="noopener">使用R中的自带函数进行计算</a><br><a href="https://www.zhihu.com/question/41943159" target="_blank" rel="noopener">使用R中的自带函数进行计算</a></p>
+<h4 id="R计算点到线距离"><a href="#R计算点到线距离" class="headerlink" title="R计算点到线距离"></a>R计算点到线距离</h4><p><a href="https://codeday.me/bug/20180925/266285.html" target="_blank" rel="noopener"> 使用R,如何计算从一点到一条线的距离？
+</a><br><a href="http://www.voidcn.com/article/p-miscuevy-btm.html" target="_blank" rel="noopener"> 使用R,如何计算从一点到一条线的距离？
+</a><br><a href="https://gis.stackovernet.com/cn/q/66115" target="_blank" rel="noopener"> calculate distance from POINT to LINESTRING in R 
+</a><br><a href="https://gis.stackexchange.com/questions/243994/how-to-calculate-distance-from-point-to-linestring-in-r-using-sf-library-and-g" target="_blank" rel="noopener">calculate distance from POINT to LINESTRING in R </a></p>
+<h4 id="R中各种距离计算"><a href="#R中各种距离计算" class="headerlink" title="R中各种距离计算"></a>R中各种距离计算</h4><p><a href="http://blog.fens.me/r-distance/" target="_blank" rel="noopener"> R语言实现46种距离算法
+</a><br><a href="https://blog.csdn.net/xxzhangx/article/details/53153821" target="_blank" rel="noopener"> R语言:计算各种距离
+</a><br><a href="https://stackoverflow.com/questions/46214479/distance-between-a-set-of-points-and-a-polygon-with-sf-in-r" target="_blank" rel="noopener"> Distance between a set of points and a polygon with sf in R
+</a><br><a href="https://stackoverflow.com/questions/18340318/computing-euclidean-distances-between-subsequent-positions-in-r" target="_blank" rel="noopener"> Computing Euclidean distances between subsequent positions in R
+</a><br><a href="https://gis.stackexchange.com/questions/140272/calculating-distance-between-set-of-points-lat-and-long-in-r" target="_blank" rel="noopener"> Calculating distance between set of points: lat and long in R?
+</a><br><a href="https://codeday.me/bug/20190122/539486.html" target="_blank" rel="noopener"> R中点要素与最近多边形的距离
+</a></p>
+<h4 id="路径相似度比较、曲线拟合"><a href="#路径相似度比较、曲线拟合" class="headerlink" title="路径相似度比较、曲线拟合"></a>路径相似度比较、曲线拟合</h4><p><a href="https://patents.google.com/patent/CN105184387A/zh(" target="_blank" rel="noopener">一种路径相似度比较方法</a><br>用 lm 画直线，用 glns可以画非线性的曲线<br><a href="http://www.voidcn.com/article/p-yiuzhqdc-buo.html" target="_blank" rel="noopener">如何在R中绘制更平滑的曲线</a><br><a href="https://cloud.tencent.com/developer/ask/112086" target="_blank" rel="noopener">如何为R中的数据拟合一条平滑曲线？</a><br><a href="https://www.zhihu.com/question/27213170" target="_blank" rel="noopener">如何判断两条轨迹（或曲线）的相似度？</a><br><a href="https://blog.csdn.net/sheyun1876/article/details/80582505" target="_blank" rel="noopener">R-LCSS计算相似性</a><br><a href="https://blog.csdn.net/u011333734/article/details/80930600" target="_blank" rel="noopener">轨迹相似性度量</a><br><a href="https://www.cnblogs.com/xueqiuqiu/p/7635516.html" target="_blank" rel="noopener">轨迹数据之数据清洗以及异常检测</a></p>
+<h4 id="动态时间规划"><a href="#动态时间规划" class="headerlink" title="动态时间规划"></a>动态时间规划</h4><p><a href="https://zhuanlan.zhihu.com/p/58027413" target="_blank" rel="noopener">曲线相似度比较-DTW动态时间规划</a><br><a href="https://blog.csdn.net/raym0ndkwan/article/details/45614813" target="_blank" rel="noopener">算法笔记-DTW动态时间规整</a><br><a href="https://stats.stackexchange.com/questions/22209/can-someone-please-explain-dynamic-time-warping-for-determining-time-series-simi" target="_blank" rel="noopener"> Can someone please explain dynamic time warping for determining time series similarity?
+</a><br><a href="https://www.r-bloggers.com/time-series-matching-with-dynamic-time-warping/" target="_blank" rel="noopener"> Time Series Matching with Dynamic Time Warping –R
+</a><br><a href="http://dtw.r-forge.r-project.org/" target="_blank" rel="noopener"> Welcome to Dynamic Time Warp project!
+</a><br><a href="https://www.cnblogs.com/luxiaoxun/archive/2013/05/09/3069036.html" target="_blank" rel="noopener">Dynamic Time Warping 动态时间规整算法</a></p>
+<h4 id="时间序列-R-轨迹"><a href="#时间序列-R-轨迹" class="headerlink" title="时间序列+R+轨迹"></a>时间序列+R+轨迹</h4><p><a href="https://www.cnblogs.com/naaoveGIS/p/6653907.html" target="_blank" rel="noopener"> 轨迹系列3——通过时间及距离维度进行轨迹聚类平滑的一种方案
+</a><br><a href="https://kknews.cc/news/5359r56.html" target="_blank" rel="noopener"> 用R语言做数据分析——时间序列聚类
+</a><br><a href="http://wenda.chinahadoop.cn/question/4241" target="_blank" rel="noopener"> R 中的一步预测 (时间序列，卡尔曼滤波)
+</a><br><a href="http://www.mamicode.com/info-detail-926750.html" target="_blank" rel="noopener">时间序列与数据挖掘</a><br><a href="https://blog.csdn.net/niuniuyuh/article/details/54809587" target="_blank" rel="noopener">DTW距离，时间序列之间的距离</a></p>
+<h4 id="什么是卡尔曼滤波"><a href="#什么是卡尔曼滤波" class="headerlink" title="什么是卡尔曼滤波"></a>什么是卡尔曼滤波</h4><p><a href="https://blog.csdn.net/heyijia0327/article/details/17487467" target="_blank" rel="noopener">卡尔曼滤波 – 从推导到应用(一)</a><br><a href="https://segmentfault.com/a/1190000012648637" target="_blank" rel="noopener">卡尔曼滤波的介绍与使用</a><br><a href="http://allenluadvance.blogspot.com/2009/09/kalman-filter.html" target="_blank" rel="noopener"> Kalman Filter 簡介
+</a><br><a href="https://www.zhihu.com/question/23971601" target="_blank" rel="noopener"> 如何通俗并尽可能详细解释卡尔曼滤波？
+</a></p>
+<h4 id="R中的卡尔曼滤波"><a href="#R中的卡尔曼滤波" class="headerlink" title="R中的卡尔曼滤波"></a>R中的卡尔曼滤波</h4><p><a href="http://f.dataguru.cn/thread-18684-1-1.html" target="_blank" rel="noopener"> 用R语言实现Kalman滤波
+</a><br><a href="https://stat.ethz.ch/R-manual/R-patched/library/stats/html/KalmanLike.html" target="_blank" rel="noopener"> Kalman Filtering
+</a><br><a href="https://bbs.pinggu.org/forum.php?mod=viewthread&amp;tid=1161375&amp;extra=&amp;page=2&amp;mobile=yes" target="_blank" rel="noopener">卡尔曼滤波在R中的实现</a></p>
+<h4 id="R语言字符串处理"><a href="#R语言字符串处理" class="headerlink" title="R语言字符串处理"></a>R语言字符串处理</h4><p><a href="http://blog.fens.me/r-stringr/" target="_blank" rel="noopener"> R语言字符串处理包stringr
+</a></p>
+<h4 id="R语言维度与取值"><a href="#R语言维度与取值" class="headerlink" title="R语言维度与取值"></a>R语言维度与取值</h4><p>a[1,3,5]表示的是第1层，第3行第5列的数据，不是取a中的前三个数，正确做法是a[1:3]<br><a href="https://bbs.pinggu.org/thread-4938344-1-1.html" target="_blank" rel="noopener"> 第1层，第3行第5列
+</a><br><a href="https://blog.csdn.net/yiifaa/article/details/73252980" target="_blank" rel="noopener"> R统计笔记（四）：中括号与双中括号的差异
+</a></p>
+<h4 id="出租车交接班行为识别与时空分布研究"><a href="#出租车交接班行为识别与时空分布研究" class="headerlink" title="出租车交接班行为识别与时空分布研究"></a>出租车交接班行为识别与时空分布研究</h4><p><a href="http://www.dqxxkx.cn/article/2017/1560-8999/1560-8999-19-2-167.shtml" target="_blank" rel="noopener"> 唐炉亮, 段倩, 阚子涵, 李清泉. 出租车交接班行为识别与时空分布研究[J]. 地球信息科学学报 
+</a><br><a href="http://www.wanfangdata.com.cn/details/detail.do?_type=perio&amp;id=jtysxtgcyxx201401034" target="_blank" rel="noopener"> 北京出租汽车交接班时空分布特性研究
+</a></p>
+<p><a href></a><br><a href></a><br><a href></a><br><a href></a><br><a href></a><br><a href></a><br><a href></a></p>
+<p><a href> 
+</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
+          
+            <a href="/tags/数据处理/" rel="tag"><i class="fa fa-tag"></i> 数据处理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/【R】R中的不确定性出现的情况/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/11/R/R绘图专题/" rel="prev" title="R绘图">
+                R绘图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">秋枫</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#去除NA值"><span class="nav-number">1.</span> <span class="nav-text">去除NA值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#已知经纬度求两点间地理距离"><span class="nav-number">2.</span> <span class="nav-text">已知经纬度求两点间地理距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R计算点到线距离"><span class="nav-number">3.</span> <span class="nav-text">R计算点到线距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R中各种距离计算"><span class="nav-number">4.</span> <span class="nav-text">R中各种距离计算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路径相似度比较、曲线拟合"><span class="nav-number">5.</span> <span class="nav-text">路径相似度比较、曲线拟合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态时间规划"><span class="nav-number">6.</span> <span class="nav-text">动态时间规划</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间序列-R-轨迹"><span class="nav-number">7.</span> <span class="nav-text">时间序列+R+轨迹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是卡尔曼滤波"><span class="nav-number">8.</span> <span class="nav-text">什么是卡尔曼滤波</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R中的卡尔曼滤波"><span class="nav-number">9.</span> <span class="nav-text">R中的卡尔曼滤波</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R语言字符串处理"><span class="nav-number">10.</span> <span class="nav-text">R语言字符串处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R语言维度与取值"><span class="nav-number">11.</span> <span class="nav-text">R语言维度与取值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#出租车交接班行为识别与时空分布研究"><span class="nav-number">12.</span> <span class="nav-text">出租车交接班行为识别与时空分布研究</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qiu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">49k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">45 分钟</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 新增访客统计代码 -->
+
+<div class="busuanzi-count">
+    <script async src="/qiu/busuanzi.pure.mini.js"></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问用户： <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+    <div class="powered-by"></div>
+    <span class="site-uv">
+      <i class="fa fa-eye"></i>
+      访问次数： <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span>
+    <!-- 博客字数统计 -->
+    
+</div>
+<!-- 新增访客统计代码 END-->
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+
+	<!-- 点击特效 -->
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="/qiu/js/fireworks/anime.min.js"></script> 
+   <script type="text/javascript" src="/qiu/js/fireworks/fireworks.js"></script><!-- 就是点击特效的 -->
+   
+ 
+	<!-- 看板娘 --> 
+   <script type="text/javascript" src="/qiu/kanbanliang/script.js"></script>
+<canvas id="live2dcanvas" width="150" height="300" class="live2d" style="visibility: visible;"></canvas>
+<style> #live2dcanvas { right:-20px!important;}</style>
+<style>
+      #live2dcanvas {
+        position: fixed;
+        //right: 0px;
+		left: 250px;
+        z-index: 999;
+        pointer-events: none;
+        bottom: -30px;
+      }
+    </style>
+    <script>loadlive2d("live2dcanvas" ,"/qiu/kanbanliang/koharu.model.json")</script> 
+	
+	
+	
+</html>

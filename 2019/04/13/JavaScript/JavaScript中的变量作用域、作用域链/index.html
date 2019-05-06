@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="基础的变量作用域认知首先，JavaScript中，函数内部可以访问全局定义的变量：12345678910var var1 = 1;function test(arg)&amp;#123;	console.log(var1);&amp;#125;test(var1);/*结果是：1undefined//证明在函数内部可以访问到全局的var1*/ 其次，JavaScript中局部变量会覆盖全局变量：123456789">
+<meta name="keywords" content="JavaScript,作用域链,作用域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中的变量作用域、作用域链">
+<meta property="og:url" content="http://yoursite.com/2019/04/13/JavaScript/JavaScript中的变量作用域、作用域链/index.html">
+<meta property="og:site_name" content="absurdmemento&#39;s Blog">
+<meta property="og:description" content="基础的变量作用域认知首先，JavaScript中，函数内部可以访问全局定义的变量：12345678910var var1 = 1;function test(arg)&amp;#123;	console.log(var1);&amp;#125;test(var1);/*结果是：1undefined//证明在函数内部可以访问到全局的var1*/ 其次，JavaScript中局部变量会覆盖全局变量：123456789">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6310069-edef14cec1bf9461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-04-17T10:32:32.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中的变量作用域、作用域链">
+<meta name="twitter:description" content="基础的变量作用域认知首先，JavaScript中，函数内部可以访问全局定义的变量：12345678910var var1 = 1;function test(arg)&amp;#123;	console.log(var1);&amp;#125;test(var1);/*结果是：1undefined//证明在函数内部可以访问到全局的var1*/ 其次，JavaScript中局部变量会覆盖全局变量：123456789">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6310069-edef14cec1bf9461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/13/JavaScript/JavaScript中的变量作用域、作用域链/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaScript中的变量作用域、作用域链 | absurdmemento's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+  
+  
+  <style>
+.post-title, h1,h2
+{
+	font-family: "constantia","Segeo UI Mono","Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","Droid Sans Fallback","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp",Sans;
+
+	
+	}
+
+.post-title  .post-title-link  /*<!--原来要这么玩 --> */
+{
+font-family: "constantia","Segeo UI Mono","Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","Droid Sans Fallback","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp",Sans;
+
+color:#ef457e;
+
+/*
+margin: 20px 0 20px;
+
+float:left*/
+}
+/*
+article,.post-block,.post post-type-normal
+*/
+
+
+#posts > article + article .post-block
+{
+background-color: #ffffff;
+
+border-radius: 14px;
+
+margin: 20px 0 20px;
+
+margin-top: 50px;
+}
+#posts > article + article .post-block:hover {
+    box-shadow: 0 5px 50px 5px rgba(250,250,250,.6);
+}
+.post-block{ padding: 40px;border-radius: 14px;;}
+#content {padding: 40px;}
+
+.pagination {
+
+    background: #c18d5f;
+	
+	box-shadow: none;
+
+}
+
+
+.posts-expand .post-title-link::before {
+
+    background-color: #459fed; //#533fa9;
+
+}
+
+
+.btn
+{
+background-color: #99ebed; //#459fed;
+color: white;
+border: 0px;
+}
+
+.post-meta
+{
+color: green;
+}
+.posts-expand .post-meta {
+    color: green;
+}
+
+a span
+{ color:#ecc656; }
+</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN" style="background-color:#c18d5f; ">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">absurdmemento's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/13/JavaScript/JavaScript中的变量作用域、作用域链/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="秋枫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="absurdmemento's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript中的变量作用域、作用域链
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-13 19:56:26" itemprop="dateCreated datePublished" datetime="2019-04-13T19:56:26+08:00">2019-04-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-17 18:32:32" itemprop="dateModified" datetime="2019-04-17T18:32:32+08:00">2019-04-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="基础的变量作用域认知"><a href="#基础的变量作用域认知" class="headerlink" title="基础的变量作用域认知"></a>基础的变量作用域认知</h4><p>首先，JavaScript中，函数内部可以访问全局定义的变量：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> var1 = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(var1);</span><br><span class="line">&#125;</span><br><span class="line">test(var1);</span><br><span class="line"><span class="comment">/*结果是：</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">undefined</span></span><br><span class="line"><span class="comment">//证明在函数内部可以访问到全局的var1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<p>其次，JavaScript中局部变量会覆盖全局变量：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> var1 = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> var1 = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">console</span>.log(var1);</span><br><span class="line">&#125;</span><br><span class="line">test(var1);</span><br><span class="line"><span class="comment">/*结果是：</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">undefined</span></span><br><span class="line"><span class="comment">//证明函数内部的var1覆盖了全局的varl</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<p>形参与同名局部变量：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> i;</span><br><span class="line">           alert(i);</span><br><span class="line">&#125;</span><br><span class="line">test(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//实际上这里只有一个变量i</span></span><br><span class="line"><span class="comment">//程序在运行时，首先声明形参i，值为10</span></span><br><span class="line"><span class="comment">//然后处理局部变量i声明，在这里i已经声明过，不作处理 </span></span><br><span class="line"><span class="comment">//在javascript中变量被多次声明是不会报错的，程序直接跳过不做处理</span></span><br></pre></td></tr></table></figure></p>
+<p>最后，JavaScript中，函数内部可以声明全局变量，只是在声明变量时，不加var声明就可以了：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> var1 = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">	var2 = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">console</span>.log(var1);</span><br><span class="line">&#125;</span><br><span class="line">test(var1);</span><br><span class="line"><span class="built_in">console</span>.log(var2);</span><br><span class="line"><span class="comment">/*结果是：</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">undefined</span></span><br><span class="line"><span class="comment">//证明函数外部可以访问到varl</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<p>但是，考虑以下情况：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> var1 = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">	var2 = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">console</span>.log(var1);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(var2);</span><br><span class="line">test(var1);</span><br><span class="line"><span class="built_in">console</span>.log(var2);</span><br><span class="line"><span class="comment">/*结果是：</span></span><br><span class="line"><span class="comment">Uncaught ReferenceError: var2 is not defined */</span></span><br></pre></td></tr></table></figure></p>
+<p>以及以下情况：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">	arg = <span class="number">5</span>;</span><br><span class="line">	<span class="built_in">console</span>.log(arg);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arg);</span><br><span class="line">test();</span><br><span class="line"><span class="built_in">console</span>.log(arg);</span><br><span class="line"><span class="comment">/*结果是：</span></span><br><span class="line"><span class="comment">Uncaught ReferenceError: arg is not defined */</span></span><br></pre></td></tr></table></figure></p>
+<p>同样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mygl1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(testgloable);</span><br><span class="line">	testgloable = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line">mygl1()<span class="comment">/*结果是：</span></span><br><span class="line"><span class="comment">Uncaught ReferenceError: testgloable is not defined */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mygl2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    testgloable = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(testgloable);</span><br><span class="line">&#125;</span><br><span class="line">mygl2()<span class="comment">/*结果是：</span></span><br><span class="line"><span class="comment">10</span></span><br><span class="line"><span class="comment">undefined */</span></span><br><span class="line">证明不加<span class="keyword">var</span>虽然可以得到全局变量，但是这样得到的变量不会提前。</span><br></pre></td></tr></table></figure></p>
+<p>删掉一句：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">	arg = <span class="number">5</span>;</span><br><span class="line">	<span class="built_in">console</span>.log(arg);</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line"><span class="built_in">console</span>.log(arg);</span><br><span class="line"><span class="comment">/*结果是：</span></span><br><span class="line"><span class="comment">5</span></span><br><span class="line"><span class="comment">Uncaught ReferenceError: arg is not defined  */</span></span><br></pre></td></tr></table></figure></p>
+<p>证明形参定义的是局部变量，是 var varx = xxx；形式的语句。</p>
+<h4 id="块级作用域、函数作用域"><a href="#块级作用域、函数作用域" class="headerlink" title="块级作用域、函数作用域"></a>块级作用域、函数作用域</h4><h5 id="块级作用域："><a href="#块级作用域：" class="headerlink" title="块级作用域："></a>块级作用域：</h5><p>任何一对花括号中的语句集都属于一个块，在这之中定义的所有变量在代码块外都是不可见的，我们称之为块级作用域。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// c语言</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">2</span>; </span><br><span class="line">	i--; </span><br><span class="line">	<span class="keyword">if</span>(i) </span><br><span class="line">	&#123; </span><br><span class="line">		<span class="keyword">int</span> j=<span class="number">3</span>; </span><br><span class="line">	&#125; </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d/n"</span>,j); </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//运行这段代码，会出现“use an undefined variable:j”的错误。</span></span><br><span class="line"><span class="comment">//可以看到，C语言拥有块级作用域，因为j是在if的语句块中定义的，因此，它在块外是无法访问的。</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="函数作用域："><a href="#函数作用域：" class="headerlink" title="函数作用域："></a>函数作用域：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123; </span><br><span class="line">&#125; </span><br><span class="line">alert(i); </span><br><span class="line">&#125; </span><br><span class="line">test();</span><br><span class="line"><span class="comment">//结果是：3</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：在ECMAScript6（以下简称ES6）之前，ECMAScript的作用域只有两种：<br>　　1、  全局作用域<br>　　2、  函数作用域<br>　　但，ES6的到来，为我们提供了”块级作用域”,且”块级作用域”并不影响 var 声明的变量。</p>
+</blockquote>
+<h4 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h4><p>作用域链是针对函数来说的，每个函数对应自己的作用域链。<br>当我们把一段JavaScript函数代码加载加入引擎的过程可以这样看待：<br><img src="https://upload-images.jianshu.io/upload_images/6310069-edef14cec1bf9461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br><strong style="color:brown;">一个JavaScript函数，在被加载到JavaScript引擎后，生成一个对象，这个对象包含两个属性，一个是一段可执行的代码块，另一个是一个引用，指向一个作用域链，比如，图中的函数在加载加入JavaScript引擎时（也可以理解为函数定义时，因为，此时JavaScript引擎会将函数处理，然后方便后面使用），生成的对象的引用指向的作用域链是全局对象。当我们要调用此函数时，生成一个对象，将函数内部的局部变量（此处为var1）添加到生成的对象，然后将其放到作用域链上，形成新的作用域链，这是调用时的作用域链，然后调用是，执行代码块，此时的变量查找范围为新生成的作用域链。函数调用完成后，删除添加到作用域链上的对象，函数的在引擎中的表示对象回到调用前的状态。</strong></p>
+<p><hr><br>参考:<br>[1]<a href="https://imweb.io/topic/5665683bd91952db73b41f5e" target="_blank" rel="noopener">JavaScript的作用域和块级作用域概念理解</a><br>[2]<a href="https://www.jianshu.com/p/7d384261ee75" target="_blank" rel="noopener">JS在函数中形参和局部变量同名的问题</a><br>[3]<a href="https://www.cnblogs.com/giggle/p/5572006.html" target="_blank" rel="noopener">ES6之块级作用域</a></p>
+<p>[4]<a href="https://github.com/mqyqingfeng/Blog/issues/6" target="_blank" rel="noopener">JavaScript深入之作用域链</a><br>[5]<a href="https://js8.in/2011/08/15/javascript%E7%9A%84%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/" target="_blank" rel="noopener">javascript的词法作用域</a><br>[6]<a href="https://github.com/mqyqingfeng/Blog/issues/3" target="_blank" rel="noopener">JavaScript深入之词法作用域和动态作用域</a><br>[7]<a href="https://www.zhihu.com/question/20032419" target="_blank" rel="noopener">动态作用域和词法域的区别是什么？</a><br>[8]<a href="https://www.zhihu.com/question/36751764" target="_blank" rel="noopener">JS中的作用域链是在什么时候建立的？</a></p>
+<p>[9]<a href="https://blog.csdn.net/shenlei19911210/article/details/43018501" target="_blank" rel="noopener">词法作用域与动态作用域的区别</a><br>[10]<a href="https://segmentfault.com/a/1190000003114255" target="_blank" rel="noopener">Javascript作用域和变量提升</a><br>[11]<a href="https://blog.csdn.net/little_little0_0/article/details/79675451" target="_blank" rel="noopener">块级作用域与函数作用域</a><br>[12]<a href="https://segmentfault.com/q/1010000000669267" target="_blank" rel="noopener">javascript里面对象和函数的区别？</a><br>[13]<a href="https://zh.wikipedia.org/wiki/%E9%97%AD%E5%8C%85_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6" target="_blank" rel="noopener">闭包 (计算机科学)</a>)</p>
+<style>
+pre {
+    font-family: Source Code Pro,Consolas,Monaco,Menlo,monospace;
+    background-color: #272822;
+    text-shadow: 0 1px #222;
+    color: #fff;
+}
+figure.highlight.javascript {
+    background: #272822;
+}
+.highlight .code pre {
+    background: #272822;
+}
+pre .keyword, pre .javascript .function {
+    color: #66d9ef;
+}
+pre .title, pre .css .hexcolor {
+    color: #a6e22e;
+}
+
+
+
+.post-body h4 {
+    color: white;
+    /* background-color: green; */
+    background-color: #406ca4;
+    border-radius: 8px;
+    padding: 6px;
+}
+.post-block {
+    background-color: lightyellow;
+}
+
+::selection {
+    background: #0865D3; 
+}
+</style>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/作用域链/" rel="tag"><i class="fa fa-tag"></i> 作用域链</a>
+          
+            <a href="/tags/作用域/" rel="tag"><i class="fa fa-tag"></i> 作用域</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/11/R/R绘图专题/" rel="next" title="R绘图">
+                <i class="fa fa-chevron-left"></i> R绘图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/17/JavaScript/JavaScript中的原型链/" rel="prev" title="JavaScript中的原型链">
+                JavaScript中的原型链 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">秋枫</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础的变量作用域认知"><span class="nav-number">1.</span> <span class="nav-text">基础的变量作用域认知</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#块级作用域、函数作用域"><span class="nav-number">2.</span> <span class="nav-text">块级作用域、函数作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#块级作用域："><span class="nav-number">2.1.</span> <span class="nav-text">块级作用域：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数作用域："><span class="nav-number">2.2.</span> <span class="nav-text">函数作用域：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作用域链"><span class="nav-number">3.</span> <span class="nav-text">作用域链</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qiu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">49k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">45 分钟</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 新增访客统计代码 -->
+
+<div class="busuanzi-count">
+    <script async src="/qiu/busuanzi.pure.mini.js"></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问用户： <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+    <div class="powered-by"></div>
+    <span class="site-uv">
+      <i class="fa fa-eye"></i>
+      访问次数： <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span>
+    <!-- 博客字数统计 -->
+    
+</div>
+<!-- 新增访客统计代码 END-->
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+
+	<!-- 点击特效 -->
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="/qiu/js/fireworks/anime.min.js"></script> 
+   <script type="text/javascript" src="/qiu/js/fireworks/fireworks.js"></script><!-- 就是点击特效的 -->
+   
+ 
+	<!-- 看板娘 --> 
+   <script type="text/javascript" src="/qiu/kanbanliang/script.js"></script>
+<canvas id="live2dcanvas" width="150" height="300" class="live2d" style="visibility: visible;"></canvas>
+<style> #live2dcanvas { right:-20px!important;}</style>
+<style>
+      #live2dcanvas {
+        position: fixed;
+        //right: 0px;
+		left: 250px;
+        z-index: 999;
+        pointer-events: none;
+        bottom: -30px;
+      }
+    </style>
+    <script>loadlive2d("live2dcanvas" ,"/qiu/kanbanliang/koharu.model.json")</script> 
+	
+	
+	
+</html>
