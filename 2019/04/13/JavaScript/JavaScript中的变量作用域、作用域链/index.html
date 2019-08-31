@@ -104,12 +104,12 @@
 <meta property="og:site_name" content="absurdmemento&#39;s Blog">
 <meta property="og:description" content="基础的变量作用域认知首先，JavaScript中，函数内部可以访问全局定义的变量：12345678910var var1 = 1;function test(arg)&amp;#123;	console.log(var1);&amp;#125;test(var1);/*结果是：1undefined//证明在函数内部可以访问到全局的var1*/ 其次，JavaScript中局部变量会覆盖全局变量：123456789">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6310069-edef14cec1bf9461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-04-17T10:32:32.384Z">
+<meta property="og:image" content="https://i.loli.net/2019/08/25/47IwhyJLSisXqjU.png">
+<meta property="og:updated_time" content="2019-08-25T03:20:35.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中的变量作用域、作用域链">
 <meta name="twitter:description" content="基础的变量作用域认知首先，JavaScript中，函数内部可以访问全局定义的变量：12345678910var var1 = 1;function test(arg)&amp;#123;	console.log(var1);&amp;#125;test(var1);/*结果是：1undefined//证明在函数内部可以访问到全局的var1*/ 其次，JavaScript中局部变量会覆盖全局变量：123456789">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6310069-edef14cec1bf9461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/25/47IwhyJLSisXqjU.png">
 
 
 
@@ -462,7 +462,7 @@ a span
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-17 18:32:32" itemprop="dateModified" datetime="2019-04-17T18:32:32+08:00">2019-04-17</time>
+                <time title="修改时间：2019-08-25 11:20:35" itemprop="dateModified" datetime="2019-08-25T11:20:35+08:00">2019-08-25</time>
               
             
           </span>
@@ -556,7 +556,7 @@ a span
 <blockquote>
 <p>注：在ECMAScript6（以下简称ES6）之前，ECMAScript的作用域只有两种：<br>　　1、  全局作用域<br>　　2、  函数作用域<br>　　但，ES6的到来，为我们提供了”块级作用域”,且”块级作用域”并不影响 var 声明的变量。</p>
 </blockquote>
-<h4 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h4><p>作用域链是针对函数来说的，每个函数对应自己的作用域链。<br>当我们把一段JavaScript函数代码加载加入引擎的过程可以这样看待：<br><img src="https://upload-images.jianshu.io/upload_images/6310069-edef14cec1bf9461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br><strong style="color:brown;">一个JavaScript函数，在被加载到JavaScript引擎后，生成一个对象，这个对象包含两个属性，一个是一段可执行的代码块，另一个是一个引用，指向一个作用域链，比如，图中的函数在加载加入JavaScript引擎时（也可以理解为函数定义时，因为，此时JavaScript引擎会将函数处理，然后方便后面使用），生成的对象的引用指向的作用域链是全局对象。当我们要调用此函数时，生成一个对象，将函数内部的局部变量（此处为var1）添加到生成的对象，然后将其放到作用域链上，形成新的作用域链，这是调用时的作用域链，然后调用是，执行代码块，此时的变量查找范围为新生成的作用域链。函数调用完成后，删除添加到作用域链上的对象，函数的在引擎中的表示对象回到调用前的状态。</strong></p>
+<h4 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h4><p>作用域链是针对函数来说的，每个函数对应自己的作用域链。<br>当我们把一段JavaScript函数代码加载加入引擎的过程可以这样看待：<br><img src="https://i.loli.net/2019/08/25/47IwhyJLSisXqjU.png" alt="6310069-edef14cec1bf9461.png"><br><strong style="color:brown;">一个JavaScript函数，在被加载到JavaScript引擎后，生成一个对象，这个对象包含两个属性，一个是一段可执行的代码块，另一个是一个引用，指向一个作用域链，比如，图中的函数在加载加入JavaScript引擎时（也可以理解为函数定义时，因为，此时JavaScript引擎会将函数处理，然后方便后面使用），生成的对象的引用指向的作用域链是全局对象。当我们要调用此函数时，生成一个对象，将函数内部的局部变量（此处为var1）添加到生成的对象，然后将其放到作用域链上，形成新的作用域链，这是调用时的作用域链，然后调用是，执行代码块，此时的变量查找范围为新生成的作用域链。函数调用完成后，删除添加到作用域链上的对象，函数的在引擎中的表示对象回到调用前的状态。</strong></p>
 <p><hr><br>参考:<br>[1]<a href="https://imweb.io/topic/5665683bd91952db73b41f5e" target="_blank" rel="noopener">JavaScript的作用域和块级作用域概念理解</a><br>[2]<a href="https://www.jianshu.com/p/7d384261ee75" target="_blank" rel="noopener">JS在函数中形参和局部变量同名的问题</a><br>[3]<a href="https://www.cnblogs.com/giggle/p/5572006.html" target="_blank" rel="noopener">ES6之块级作用域</a></p>
 <p>[4]<a href="https://github.com/mqyqingfeng/Blog/issues/6" target="_blank" rel="noopener">JavaScript深入之作用域链</a><br>[5]<a href="https://js8.in/2011/08/15/javascript%E7%9A%84%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/" target="_blank" rel="noopener">javascript的词法作用域</a><br>[6]<a href="https://github.com/mqyqingfeng/Blog/issues/3" target="_blank" rel="noopener">JavaScript深入之词法作用域和动态作用域</a><br>[7]<a href="https://www.zhihu.com/question/20032419" target="_blank" rel="noopener">动态作用域和词法域的区别是什么？</a><br>[8]<a href="https://www.zhihu.com/question/36751764" target="_blank" rel="noopener">JS中的作用域链是在什么时候建立的？</a></p>
 <p>[9]<a href="https://blog.csdn.net/shenlei19911210/article/details/43018501" target="_blank" rel="noopener">词法作用域与动态作用域的区别</a><br>[10]<a href="https://segmentfault.com/a/1190000003114255" target="_blank" rel="noopener">Javascript作用域和变量提升</a><br>[11]<a href="https://blog.csdn.net/little_little0_0/article/details/79675451" target="_blank" rel="noopener">块级作用域与函数作用域</a><br>[12]<a href="https://segmentfault.com/q/1010000000669267" target="_blank" rel="noopener">javascript里面对象和函数的区别？</a><br>[13]<a href="https://zh.wikipedia.org/wiki/%E9%97%AD%E5%8C%85_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6" target="_blank" rel="noopener">闭包 (计算机科学)</a>)</p>
@@ -717,7 +717,7 @@ pre .title, pre .css .hexcolor {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">56</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -748,7 +748,9 @@ pre .title, pre .css .hexcolor {
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -797,7 +799,11 @@ pre .title, pre .css .hexcolor {
                     
                       
                     
-                    <span class="site-state-item-count">16</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -866,7 +872,7 @@ pre .title, pre .css .hexcolor {
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">81k</span>
+    <span title="站点总字数">131k</span>
   
 
   
@@ -875,7 +881,7 @@ pre .title, pre .css .hexcolor {
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:14</span>
+    <span title="站点阅读时长">2:01</span>
   
 </div>
 
@@ -1140,12 +1146,12 @@ pre .title, pre .css .hexcolor {
 
 	<!-- 点击特效 -->
    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
-   <script type="text/javascript" src="/qiu/js/fireworks/anime.min.js"></script> 
-   <script type="text/javascript" src="/qiu/js/fireworks/fireworks.js"></script><!-- 就是点击特效的 -->
+   <script type="text/javascript" src="/qiu/js/fireworks/anime.min.js" async></script> 
+   <script type="text/javascript" src="/qiu/js/fireworks/fireworks.js" async></script><!-- 就是点击特效的 -->
    
  
 	<!-- 看板娘 --> 
-   <script type="text/javascript" src="/qiu/kanbanliang/script.js"></script>
+   <script type="text/javascript" src="/qiu/kanbanliang/script.js" defer></script>
 <canvas id="live2dcanvas" width="150" height="300" class="live2d" style="visibility: visible;"></canvas>
 <style> #live2dcanvas { right:-20px!important;}</style>
 <style>
@@ -1158,7 +1164,7 @@ pre .title, pre .css .hexcolor {
         bottom: -30px;
       }
     </style>
-    <script>loadlive2d("live2dcanvas" ,"/qiu/kanbanliang/koharu.model.json")</script> 
+    <script defer>loadlive2d("live2dcanvas" ,"/qiu/kanbanliang/koharu.model.json")</script> 
 	
 	
 	
