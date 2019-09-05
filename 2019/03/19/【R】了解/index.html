@@ -872,6 +872,26 @@ a span
 
 
 
+
+
+<!-- 新增访客统计代码 -->
+
+<div class="busuanzi-count">
+    <script async src="/qiu/busuanzi.pure.mini.js"></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问用户： <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+    <div class="powered-by"></div>
+    <span class="site-uv">
+      <i class="fa fa-eye"></i>
+      访问次数： <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span>
+    <!-- 博客字数统计 -->
+    
+</div>
+<!-- 新增访客统计代码 END-->
+
         
 
 
@@ -1069,7 +1089,27 @@ a span
 </body>
 
 
-	
+		<!-- 点击特效 -->
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="/qiu/js/fireworks/anime.min.js"></script> 
+   <script type="text/javascript" src="/qiu/js/fireworks/fireworks.js"></script><!-- 就是点击特效的 -->
+   
+ 
+	<!-- 看板娘 --> 
+   <script type="text/javascript" src="/qiu/kanbanliang/script.js"></script>
+<canvas id="live2dcanvas" width="150" height="300" class="live2d" style="visibility: visible;"></canvas>
+<style> #live2dcanvas { right:-20px!important;}</style>
+<style>
+      #live2dcanvas {
+        position: fixed;
+        //right: 0px;
+		left: 250px;
+        z-index: 999;
+        pointer-events: none;
+        bottom: -30px;
+      }
+    </style>
+    <script>loadlive2d("live2dcanvas" ,"/qiu/kanbanliang/koharu.model.json")</script> 
 	
 	
 </html>
