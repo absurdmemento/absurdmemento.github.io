@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="总结JavaScript中使用过的函数的语法。">
+<meta name="keywords" content="语法,函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中遇到过的函数">
+<meta property="og:url" content="http://yoursite.com/2019/09/12/JavaScript/JavaScript 函数收集/index.html">
+<meta property="og:site_name" content="absurdmemento&#39;s Blog">
+<meta property="og:description" content="总结JavaScript中使用过的函数的语法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6310069-80096f1109ec95e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/860">
+<meta property="og:image" content="https://i.loli.net/2019/09/12/XvbQ2tzYmBEnAgf.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/12/KSTtfEQCRN4VuZh.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/12/XvbQ2tzYmBEnAgf.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/12/KSTtfEQCRN4VuZh.png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6310069-8b268ed0420a2afe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6310069-7a911f09364e31e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-09-13T11:23:38.186Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中遇到过的函数">
+<meta name="twitter:description" content="总结JavaScript中使用过的函数的语法。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6310069-80096f1109ec95e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/860">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/12/JavaScript/JavaScript 函数收集/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaScript中遇到过的函数 | absurdmemento's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+  
+  
+  <style>
+.post-title, h1,h2
+{
+	font-family: "constantia","Segeo UI Mono","Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","Droid Sans Fallback","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp",Sans;
+
+	
+	}
+
+.post-title  .post-title-link  /*<!--原来要这么玩 --> */
+{
+font-family: "constantia","Segeo UI Mono","Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","Droid Sans Fallback","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp",Sans;
+
+color:#ef457e;
+
+/*
+margin: 20px 0 20px;
+
+float:left*/
+}
+/*
+article,.post-block,.post post-type-normal
+*/
+
+
+#posts > article + article .post-block
+{
+background-color: #ffffff;
+
+border-radius: 14px;
+
+margin: 20px 0 20px;
+
+margin-top: 50px;
+}
+#posts > article + article .post-block:hover {
+    box-shadow: 0 5px 50px 5px rgba(250,250,250,.6);
+}
+.post-block{ padding: 40px;border-radius: 14px;;}
+#content {padding: 40px;}
+
+.pagination {
+
+    background: #c18d5f;
+	
+	box-shadow: none;
+
+}
+
+
+.posts-expand .post-title-link::before {
+
+    background-color: #459fed; //#533fa9;
+
+}
+
+
+.btn
+{
+background-color: #99ebed; //#459fed;
+color: white;
+border: 0px;
+}
+
+.post-meta
+{
+color: green;
+}
+.posts-expand .post-meta {
+    color: green;
+}
+
+a span
+{ color:#ecc656; }
+</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN" style="background-color:#c18d5f; ">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">absurdmemento's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/12/JavaScript/JavaScript 函数收集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="秋枫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="absurdmemento's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript中遇到过的函数
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-12 12:25:39" itemprop="dateCreated datePublished" datetime="2019-09-12T12:25:39+08:00">2019-09-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-13 19:23:38" itemprop="dateModified" datetime="2019-09-13T19:23:38+08:00">2019-09-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">28k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">26 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/6310069-80096f1109ec95e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/860" alt><br>总结JavaScript中使用过的函数的语法。<br><a id="more"></a></p>
+<h3 id="A"><a href="#A" class="headerlink" title="A"></a>A</h3><h4 id="函数：Array-concat"><a href="#函数：Array-concat" class="headerlink" title="函数：Array.concat"></a>函数：Array.concat</h4><h5 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h5><p>append(x, values, after = length(x))</p>
+<h5 id="Arguments-参数"><a href="#Arguments-参数" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x</li>
+<li>values</li>
+<li>after</li>
+</ul>
+<h5 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NOT RUN &#123;</span></span><br><span class="line">append(<span class="number">1</span>:<span class="number">5</span>, <span class="number">0</span>:<span class="number">1</span>, after = <span class="number">3</span>)</span><br><span class="line"><span class="comment"># &#125;</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/append" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：Array-every"><a href="#函数：Array-every" class="headerlink" title="函数：Array.every"></a>函数：Array.every</h4><h5 id="Usage-1"><a href="#Usage-1" class="headerlink" title="Usage"></a>Usage</h5><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">as.POSIXct(x, tz = <span class="string">""</span>, …)</span><br><span class="line">as.POSIXlt(x, tz = <span class="string">""</span>, …)</span><br><span class="line"><span class="comment"># S3 method for character</span></span><br><span class="line">as.POSIXlt(x, tz = <span class="string">""</span>, format,</span><br><span class="line">           tryFormats = c(<span class="string">"%Y-%m-%d %H:%M:%OS"</span>,</span><br><span class="line">                          <span class="string">"%Y/%m/%d %H:%M:%OS"</span>,</span><br><span class="line">                          <span class="string">"%Y-%m-%d %H:%M"</span>,</span><br><span class="line">                          <span class="string">"%Y/%m/%d %H:%M"</span>,</span><br><span class="line">                          <span class="string">"%Y-%m-%d"</span>,</span><br><span class="line">                          <span class="string">"%Y/%m/%d"</span>),</span><br><span class="line">           optional = <span class="literal">FALSE</span>, …)</span><br><span class="line"><span class="comment"># S3 method for default</span></span><br><span class="line">as.POSIXlt(x, tz = <span class="string">""</span>,</span><br><span class="line">           optional = <span class="literal">FALSE</span>, …)</span><br><span class="line"><span class="comment"># S3 method for numeric</span></span><br><span class="line">as.POSIXlt(x, tz = <span class="string">""</span>, origin, …)</span><br><span class="line"></span><br><span class="line"><span class="comment"># S3 method for POSIXlt</span></span><br><span class="line">as.double(x, …)</span><br></pre></td></tr></table></figure>
+<h5 id="Arguments-参数-1"><a href="#Arguments-参数-1" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x  用来转换的R对象</li>
+<li><p>tz  如果需要，则进行时区规范化。系统特定（参见时区），但””是当前时区，“GMT”是UTC（世界时，协调）。 在某些带有警告的平台上，无效值通常被视为UTC。</p>
+</li>
+<li><p>…  要传递给其他方法或从其他方法传递的其他参数</p>
+</li>
+<li>format  字符串给出<code>strptime</code>使用的日期时间格式</li>
+<li>tryFormats  如果<code>fromat</code>未指定，则使用此字符串作为向量进行尝试</li>
+<li>optional 逻辑指示如果格式猜测不成功则返回NA（而不是发出错误信号）</li>
+<li>​</li>
+<li>origin</li>
+</ul>
+<h5 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-1"><a href="#Examples-1" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/as.POSIX*" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：Array-from"><a href="#函数：Array-from" class="headerlink" title="函数：Array.from()"></a>函数：Array.from()</h4><h5 id="Usage-2"><a href="#Usage-2" class="headerlink" title="Usage"></a>Usage</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.from(arrayLike[, mapFn[, thisArg]])</span><br></pre></td></tr></table></figure>
+<h5 id="Arguments-参数-2"><a href="#Arguments-参数-2" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>arrayLike  想要转换成数组的伪数组对象或可迭代对象。</li>
+<li>mapFn    如果指定了该参数，新数组中的每个元素会执行该回调函数。</li>
+<li>thisArg 可选参数，执行回调函数 mapFn 时 this 对象。</li>
+</ul>
+<h5 id="说明-2"><a href="#说明-2" class="headerlink" title="说明"></a>说明</h5><p>Array.from() 方法从一个类似数组或可迭代对象中创建一个新的，浅拷贝的数组实例。</p>
+<h5 id="Examples-2"><a href="#Examples-2" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/from" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：Array-filter"><a href="#函数：Array-filter" class="headerlink" title="函数：Array.filter"></a>函数：Array.filter</h4><h5 id="Usage-3"><a href="#Usage-3" class="headerlink" title="Usage"></a>Usage</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newArray = arr.filter(callback(element[, index[, array]])[, thisArg])</span><br></pre></td></tr></table></figure>
+<h5 id="Arguments-参数-3"><a href="#Arguments-参数-3" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>callback  用来处理数组中每个元素的函数<ul>
+<li>element     当前被传递给函数的元素</li>
+<li>index         当前元素的下标</li>
+<li>array          元素所在数组</li>
+</ul>
+</li>
+<li>thisArg   调用函数时，赋给<strong>this</strong>的值</li>
+</ul>
+<h5 id="说明-3"><a href="#说明-3" class="headerlink" title="说明"></a>说明</h5><p>一个新的、由通过测试的元素组成的数组，如果没有任何数组元素通过测试，则返回空数组。</p>
+<h5 id="Examples-3"><a href="#Examples-3" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/as.POSIX*" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：Array-reduce"><a href="#函数：Array-reduce" class="headerlink" title="函数：Array.reduce"></a>函数：Array.reduce</h4><h5 id="Usage-4"><a href="#Usage-4" class="headerlink" title="Usage"></a>Usage</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.reduce(callback(accumulator, currentValue[, index[, array]])[, initialValue])</span><br></pre></td></tr></table></figure>
+<h5 id="Arguments-参数-4"><a href="#Arguments-参数-4" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>callback  用来处理数组中每个元素的函数<ul>
+<li>accumulator    用来存放每次调用所得的处理结果。</li>
+<li>currentValue  当前被传递给函数的元素</li>
+<li>currentIndex  当前元素的下标</li>
+<li>array 元素所在数组</li>
+</ul>
+</li>
+<li>initialValue  第一次调用函数时，赋给<strong>accumulator</strong>的值</li>
+</ul>
+<h5 id="说明-4"><a href="#说明-4" class="headerlink" title="说明"></a>说明</h5><p>reduce 会多次调用callback，每次调用传入四个实际参数，上一次返回值、本次数组输入元素、元素索引、数组。传入的第一个参数和map等不同。<br><img src="https://i.loli.net/2019/09/12/XvbQ2tzYmBEnAgf.png" alt><br><img src="https://i.loli.net/2019/09/12/KSTtfEQCRN4VuZh.png" alt></p>
+<p>callback永远当函数调用，而不是方法。</p>
+<h5 id="Examples-4"><a href="#Examples-4" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[0, 1, 2, 3, 4].reduce(function()&#123;</span><br><span class="line">  console.log(arguments[0],arguments[1],arguments[2],arguments[3]);</span><br><span class="line">&#125;);</span><br><span class="line"> 0 1 1 [0, 1, 2, 3, 4]</span><br><span class="line"> undefined 2 2 [0, 1, 2, 3, 4]</span><br><span class="line"> undefined 3 3 [0, 1, 2, 3, 4]</span><br><span class="line"> undefined 4 4 [0, 1, 2, 3, 4]</span><br><span class="line">undefined</span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：Array-prototype-shift"><a href="#函数：Array-prototype-shift" class="headerlink" title="函数：Array.prototype.shift()"></a>函数：Array.prototype.shift()</h4><h5 id="Usage-5"><a href="#Usage-5" class="headerlink" title="Usage"></a>Usage</h5><p>shift() 方法从数组中删除第一个元素，并返回该元素的值。此方法更改数组的长度。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.shift()</span><br></pre></td></tr></table></figure></p>
+<h5 id="Arguments-参数-5"><a href="#Arguments-参数-5" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>callback  用来处理数组中每个元素的函数<ul>
+<li>accumulator    用来存放每次调用所得的处理结果。</li>
+<li>currentValue  当前被传递给函数的元素</li>
+<li>currentIndex  当前元素的下标</li>
+<li>array 元素所在数组</li>
+</ul>
+</li>
+<li>initialValue  第一次调用函数时，赋给<strong>accumulator</strong>的值</li>
+</ul>
+<h5 id="说明-5"><a href="#说明-5" class="headerlink" title="说明"></a>说明</h5><p>shift 方法移除索引为 0 的元素(即第一个元素)，并返回被移除的元素，其他元素的索引值随之减 1。如果 length 属性的值为 0 (长度为 0)，则返回 undefined。</p>
+<p>shift 方法并不局限于数组：这个方法能够通过 call 或 apply 方法作用于类似数组的对象上。但是对于没有 length 属性（从0开始的一系列连续的数字属性的最后一个）的对象，调用该方法可能没有任何意义。<br><img src="https://i.loli.net/2019/09/12/XvbQ2tzYmBEnAgf.png" alt><br><img src="https://i.loli.net/2019/09/12/KSTtfEQCRN4VuZh.png" alt></p>
+<h5 id="Examples-5"><a href="#Examples-5" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[0, 1, 2, 3, 4].reduce(function()&#123;</span><br><span class="line">  console.log(arguments[0],arguments[1],arguments[2],arguments[3]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/shift" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：Array-prototype-slice"><a href="#函数：Array-prototype-slice" class="headerlink" title="函数：Array.prototype.slice()"></a>函数：Array.prototype.slice()</h4><h5 id="Usage-6"><a href="#Usage-6" class="headerlink" title="Usage"></a>Usage</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.slice([begin[, end]])</span><br></pre></td></tr></table></figure>
+<h5 id="Arguments-参数-6"><a href="#Arguments-参数-6" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>begin  用来处理数组中每个元素的函数</li>
+<li><p>end     第一次调用函数时，赋给accumulator的值</p>
+<h5 id="说明-6"><a href="#说明-6" class="headerlink" title="说明"></a>说明</h5><p><code>slice</code> 不会修改原数组，只会返回一个浅复制了原数组中的元素的一个新数组。原数组的元素会按照下述规则拷贝：</p>
+</li>
+<li><p>如果该元素是个对象引用 （不是实际的对象），<code>slice</code> 会拷贝这个对象引用到新的数组里。两个对象引用都引用了同一个对象。如果被引用的对象发生改变，则新的和原来的数组中的这个元素也会发生改变。</p>
+</li>
+</ul>
+<ul>
+<li>对于字符串、数字及布尔值来说（不是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" rel="noopener"><code>String</code></a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank" rel="noopener"><code>Number</code></a> 或者 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Boolean" target="_blank" rel="noopener"><code>Boolean</code></a> 对象），<code>slice</code> 会拷贝这些值到新的数组里。在别的数组里修改这些字符串或数字或是布尔值，将不会影响另一个数组。</li>
+</ul>
+<p>如果向两个数组任一中添加了新元素，则另一个不会受到影响。</p>
+<h5 id="Examples-6"><a href="#Examples-6" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="B"><a href="#B" class="headerlink" title="B"></a>B</h3><h4 id="b1"><a href="#b1" class="headerlink" title="b1"></a>b1</h4><h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h4 id="函数：chartr"><a href="#函数：chartr" class="headerlink" title="函数：chartr"></a>函数：chartr</h4><h5 id="Usage-7"><a href="#Usage-7" class="headerlink" title="Usage"></a>Usage</h5><p>chartr(old, new, x)<br>tolower(x)<br>toupper(x)<br>casefold(x, upper = FALSE)</p>
+<h5 id="Arguments-参数-7"><a href="#Arguments-参数-7" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x  字符向量，或者可以通过as.character强制转换为字符的对象。</li>
+<li>old  一个字符串用来指定要转换的字符。 如果提供长度为2或更大的字符向量，则第一个元素将与警告一起使用。</li>
+<li>new  指定翻译的字符串</li>
+<li>upper 累计值，转换为大写还是小写</li>
+</ul>
+<h5 id="说明-7"><a href="#说明-7" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-7"><a href="#Examples-7" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- &quot;MiXeD cAsE 123&quot; </span><br><span class="line">&gt; chartr (&quot;iXs&quot; , &quot;why&quot; , x) # w替换i，h替换X，y替换s</span><br><span class="line">[1] &quot;MwheD cAyE 123&quot;</span><br><span class="line">&gt; chartr (&quot;a-cX&quot; , &quot;D-Fw&quot; , x) # </span><br><span class="line">[1] &quot;MiweD FAsE 123&quot;</span><br><span class="line">&gt; tolower (x)</span><br><span class="line">[1] &quot;mixed case 123&quot;</span><br><span class="line">&gt; toupper (x)</span><br><span class="line">[1] &quot;MIXED CASE 123&quot;</span><br><span class="line">x &lt;- &quot;MiXeD cAsE 123&quot;</span><br><span class="line">chartr(&quot;iXs&quot;, &quot;why&quot;, x)</span><br><span class="line">chartr(&quot;a-cX&quot;, &quot;D-Fw&quot;, x)</span><br><span class="line">tolower(x)</span><br><span class="line">toupper(x)</span><br><span class="line"></span><br><span class="line">## &quot;Mixed Case&quot; Capitalizing - toupper( every first letter of a word ) :</span><br><span class="line"></span><br><span class="line">.simpleCap &lt;- function(x) &#123;</span><br><span class="line">    s &lt;- strsplit(x, &quot; &quot;)[[1]]</span><br><span class="line">    paste(toupper(substring(s, 1, 1)), substring(s, 2),</span><br><span class="line">          sep = &quot;&quot;, collapse = &quot; &quot;)</span><br><span class="line">&#125;</span><br><span class="line">.simpleCap(&quot;the quick red fox jumps over the lazy brown dog&quot;)</span><br><span class="line">## -&gt;  [1] &quot;The Quick Red Fox Jumps Over The Lazy Brown Dog&quot;</span><br><span class="line"></span><br><span class="line">## and the better, more sophisticated version:</span><br><span class="line">capwords &lt;- function(s, strict = FALSE) &#123;</span><br><span class="line">    cap &lt;- function(s) paste(toupper(substring(s, 1, 1)),</span><br><span class="line">                  &#123;s &lt;- substring(s, 2); if(strict) tolower(s) else s&#125;,</span><br><span class="line">                             sep = &quot;&quot;, collapse = &quot; &quot; )</span><br><span class="line">    sapply(strsplit(s, split = &quot; &quot;), cap, USE.NAMES = !is.null(names(s)))</span><br><span class="line">&#125;</span><br><span class="line">capwords(c(&quot;using AIC for model selection&quot;))</span><br><span class="line">## -&gt;  [1] &quot;Using AIC For Model Selection&quot;</span><br><span class="line">capwords(c(&quot;using AIC&quot;, &quot;for MODEL selection&quot;), strict = TRUE)</span><br><span class="line">## -&gt;  [1] &quot;Using Aic&quot;  &quot;For Model Selection&quot;</span><br><span class="line">##                ^^^        ^^^^^</span><br><span class="line">##               &apos;bad&apos;       &apos;good&apos;</span><br><span class="line"></span><br><span class="line">## -- Very simple insecure crypto --</span><br><span class="line">rot &lt;- function(ch, k = 13) &#123;</span><br><span class="line">   p0 &lt;- function(...) paste(c(...), collapse = &quot;&quot;)</span><br><span class="line">   A &lt;- c(letters, LETTERS, &quot; &apos;&quot;)</span><br><span class="line">   I &lt;- seq_len(k); chartr(p0(A), p0(c(A[-I], A[I])), ch)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pw &lt;- &quot;my secret pass phrase&quot;</span><br><span class="line">(crypw &lt;- rot(pw, 13)) #-&gt; you can send this off</span><br><span class="line"></span><br><span class="line">## now ``decrypt&apos;&apos; :</span><br><span class="line">rot(crypw, 54 - 13) # -&gt; the original:</span><br><span class="line">stopifnot(identical(pw, rot(crypw, 54 - 13)))</span><br><span class="line"># &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/chartr" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：CRS-class"><a href="#函数：CRS-class" class="headerlink" title="函数：CRS-class"></a>函数：CRS-class</h4><p>Class “CRS” Of Coordinate Reference System Arguments<br>PROJ.4 projection system的接口类。<br>该类被定义为空存根用来接受sp包中的NA值。<br>如果rgdal包可用，则该类将允许空间数据与坐标参考系统相关联。<br>必须完全按照PROJ.4文档中的参数输入参数，特别是+<arg>=<value>字符串中不能有任何空格，并且连续的此类字符串只能用空格分隔。<br>请注意，地理坐标只接受“+proj=longlat +ellps=WGS84”，必须指定（东边，北边）; 对于最新版本的PROJ.4库，必须给出（或从给定的“+datum=”值内部扩展）“+ellps=”定义，并且应该设置为适当的值。</value></arg></p>
+<h5 id="Usage-8"><a href="#Usage-8" class="headerlink" title="Usage"></a>Usage</h5><blockquote>
+<p>CRS(projargs, doCheckCRSArgs=TRUE)<br>identicalCRS(x,y)</p>
+</blockquote>
+<h5 id="Arguments-参数-8"><a href="#Arguments-参数-8" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>projargs   字符串类型，表示投影参数；此参数必须完全按照PROJ.4文档输入; 如果投影未知，则使用as.character（NA），它可能会丢失或为零长度的空字符串，然后将设置为缺失值。</li>
+<li>doCheckCRSArgs   默认为TRUE，包开发人员必须将其设置为FALSE，包括S4类定义中的CRS，以避免无法控制地加载rgdal命名空间</li>
+<li>x   具有proj4string方法的对象，或者如果缺少y，则列出具有proj4string方法的对象</li>
+<li>y   类Spatial的对象，或者有proj4string方法的对象</li>
+</ul>
+<h5 id="说明-8"><a href="#说明-8" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-8"><a href="#Examples-8" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CRS()</span><br><span class="line">CRS(&quot;&quot;)</span><br><span class="line">CRS(as.character(NA))</span><br><span class="line">CRS(&quot;+proj=longlat +datum=WGS84&quot;)</span><br><span class="line">if (require(rgdal)) &#123;</span><br><span class="line">  print(CRSargs(CRS(&quot;+proj=longlat +datum=NAD27&quot;)))</span><br><span class="line">  print(CRSargs(CRS(&quot;+init=epsg:4267&quot;)))</span><br><span class="line">  print(CRSargs(CRS(&quot;+init=epsg:26978&quot;)))</span><br><span class="line">  print(CRSargs(CRS(paste(&quot;+proj=sterea +lat_0=52.15616055555555&quot;,</span><br><span class="line"> &quot;+lon_0=5.38763888888889 +k=0.999908 +x_0=155000 +y_0=463000 +ellps=bessel&quot;,</span><br><span class="line"> &quot; +towgs84=565.237,50.0087,465.658,-0.406857,0.350733,-1.87035,4.0812 +units=m&quot;))))</span><br><span class="line">  print(CRSargs(CRS(&quot;+init=epsg:28992&quot;)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/sp/versions/1.3-1/topics/CRS-class" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：crs"><a href="#函数：crs" class="headerlink" title="函数：crs"></a>函数：crs</h4><h5 id="Usage-9"><a href="#Usage-9" class="headerlink" title="Usage"></a>Usage</h5><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">st_crs(x, <span class="keyword">...</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">"st_crs"</span>(x, <span class="keyword">...</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">"st_crs"</span>(x, <span class="keyword">...</span>)</span><br><span class="line"></span><br><span class="line">st_crs(x) &lt;- value</span><br><span class="line"></span><br><span class="line"><span class="string">"st_crs"</span>(x) &lt;- value</span><br><span class="line"></span><br><span class="line"><span class="string">"st_crs"</span>(x) &lt;- value</span><br></pre></td></tr></table></figure>
+<h5 id="Arguments-参数-9"><a href="#Arguments-参数-9" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><h5 id="说明-9"><a href="#说明-9" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-9"><a href="#Examples-9" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://www.rdocumentation.org/packages/sf/versions/0.2-2/topics/crs" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：cumsum"><a href="#函数：cumsum" class="headerlink" title="函数：cumsum"></a>函数：cumsum</h4><p>简介：<br>返回一个向量，其元素是参数元素的累积和，乘积，最小值或最大值。</p>
+<h5 id="Usage-10"><a href="#Usage-10" class="headerlink" title="Usage"></a>Usage</h5><p>cumsum(x)<br>cumprod(x)<br>cummax(x)<br>cummin(x)</p>
+<h5 id="Arguments-参数-10"><a href="#Arguments-参数-10" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x 数字或复数（不是cummin或cummax）对象，或可以强制转换为其中一种的对象。</li>
+</ul>
+<h5 id="说明-10"><a href="#说明-10" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-10"><a href="#Examples-10" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt; cumsum(<span class="number">100</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="number">100</span></span><br><span class="line">&gt;  cumsum(<span class="number">1</span>:<span class="number">10</span>) <span class="comment">#累加</span></span><br><span class="line"> [<span class="number">1</span>]  <span class="number">1</span>  <span class="number">3</span>  <span class="number">6</span> <span class="number">10</span> <span class="number">15</span> <span class="number">21</span> <span class="number">28</span> <span class="number">36</span> <span class="number">45</span> <span class="number">55</span></span><br><span class="line">&gt;  cumprod(<span class="number">1</span>:<span class="number">10</span>) <span class="comment">#累乘</span></span><br><span class="line"> [<span class="number">1</span>]       <span class="number">1</span>       <span class="number">2</span>       <span class="number">6</span>      <span class="number">24</span>     <span class="number">120</span>     <span class="number">720</span>    <span class="number">5040</span>   <span class="number">40320</span>  <span class="number">362880</span> <span class="number">3628800</span></span><br><span class="line">&gt;  cummin(c(<span class="number">3</span>:<span class="number">1</span>, <span class="number">2</span>:<span class="number">0</span>, <span class="number">4</span>:<span class="number">2</span>)) <span class="comment">#后面的数不能大于前一个，大于的按等于前一个处理。</span></span><br><span class="line">[<span class="number">1</span>] <span class="number">3</span> <span class="number">2</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line">&gt;  cummax(c(<span class="number">3</span>:<span class="number">1</span>, <span class="number">2</span>:<span class="number">0</span>, <span class="number">4</span>:<span class="number">2</span>)) <span class="comment">#后面的数一定要大于前一个，小的按等于前一个处理。</span></span><br><span class="line">[<span class="number">1</span>] <span class="number">3</span> <span class="number">3</span> <span class="number">3</span> <span class="number">3</span> <span class="number">3</span> <span class="number">3</span> <span class="number">4</span> <span class="number">4</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cumsum" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><h4 id="函数：difftime"><a href="#函数：difftime" class="headerlink" title="函数：difftime"></a>函数：difftime</h4><p>可以用来将时间转化为R中两个时间之差的格式，以方便进行比较。</p>
+<h5 id="Usage-11"><a href="#Usage-11" class="headerlink" title="Usage"></a>Usage</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">time1 - time2</span><br><span class="line">difftime(time1, time2, tz,</span><br><span class="line">         units = c(&quot;auto&quot;, &quot;secs&quot;, &quot;mins&quot;, &quot;hours&quot;,</span><br><span class="line">                   &quot;days&quot;, &quot;weeks&quot;))</span><br><span class="line"></span><br><span class="line">as.difftime(tim, format = &quot;%X&quot;, units = &quot;auto&quot;)</span><br><span class="line"></span><br><span class="line"># S3 method for difftime</span><br><span class="line">format(x, ...)</span><br><span class="line"># S3 method for difftime</span><br><span class="line">units(x)</span><br><span class="line"># S3 method for difftime</span><br><span class="line">units(x) &lt;- value</span><br><span class="line"># S3 method for difftime</span><br><span class="line">as.double(x, units = &quot;auto&quot;, ...)</span><br><span class="line"></span><br><span class="line">## Group methods, notably for round(), signif(), floor(),</span><br><span class="line">## ceiling(), trunc(), abs(); called directly, *not* as Math():</span><br><span class="line"># S3 method for difftime</span><br><span class="line">Math(x, …)</span><br></pre></td></tr></table></figure>
+<h5 id="Arguments-参数-11"><a href="#Arguments-参数-11" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><h5 id="说明-11"><a href="#说明-11" class="headerlink" title="说明"></a>说明</h5><p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/difftime" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：dim"><a href="#函数：dim" class="headerlink" title="函数：dim"></a>函数：dim</h4><p>简介：<br>检测或设置一个对象的维度参数。</p>
+<h5 id="Usage-12"><a href="#Usage-12" class="headerlink" title="Usage"></a>Usage</h5><blockquote>
+<p>dim(x)<br>dim(x) &lt;- value</p>
+</blockquote>
+<h5 id="Arguments-参数-12"><a href="#Arguments-参数-12" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x<br>一个R对象，比如：矩阵、数组、数据框（data frame） </li>
+<li>value<br>For the default method, either NULL or a numeric vector, which is coerced to integer (by truncation).<br>对于默认方法，可以是NULL或数值向量，它被强制转换为整数（通过截断）。</li>
+</ul>
+<h5 id="说明-12"><a href="#说明-12" class="headerlink" title="说明"></a>说明</h5><p>维数为value的元素个数，每一维度的长度是value向量对应的分量的值。<br>比如（3，4，5）向量设置的含义就是，三维，有3行，有4列，有5层，共计60个元素。</p>
+<h5 id="Examples-11"><a href="#Examples-11" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 1:12 ; dim(x) &lt;- c(3,4)</span><br><span class="line">&gt; x</span><br><span class="line">&gt; View(x)</span><br></pre></td></tr></table></figure>
+<p>结果：<br><img src="https://upload-images.jianshu.io/upload_images/6310069-8b268ed0420a2afe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">m &lt;- matrix(1:12, 3, 4)</span><br><span class="line">dim(m)      # 3 4</span><br><span class="line"></span><br><span class="line">d &lt;- data.frame(a = 1:3, b = 4:6, c = 7:9, d = 10:12)</span><br><span class="line">dim(d)     # 3 4</span><br><span class="line"></span><br><span class="line">a &lt;- array(1:24, dim = 2:4)</span><br><span class="line">dim(a)     # 2 3 4</span><br><span class="line"></span><br><span class="line">v &lt;- 1:12</span><br><span class="line">dim(v)     # NULL</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/dim" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：dist2Line"><a href="#函数：dist2Line" class="headerlink" title="函数：dist2Line"></a>函数：dist2Line</h4><p>计算点到线的距离<br><a href="https://www.rdocumentation.org/packages/geosphere/versions/1.5-5/topics/dist2Line" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：distHaversine"><a href="#函数：distHaversine" class="headerlink" title="函数：distHaversine"></a>函数：distHaversine</h4><p><a href="https://www.rdocumentation.org/packages/geosphere/versions/1.5-1/topics/distHaversine" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：distm"><a href="#函数：distm" class="headerlink" title="函数：distm"></a>函数：distm</h4><h5 id="Usage-13"><a href="#Usage-13" class="headerlink" title="Usage"></a>Usage</h5><p>distm(x, y, fun=distHaversine)</p>
+<h5 id="Arguments-参数-13"><a href="#Arguments-参数-13" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x   点的精度/纬度</li>
+<li>y   同x，如果缺省，则使用x的值</li>
+<li>fun   距离计算函数  distCosine, distHaversine, distVincenty等</li>
+</ul>
+<h5 id="说明-13"><a href="#说明-13" class="headerlink" title="说明"></a>说明</h5><p><a href="http://en.wikipedia.org/wiki/Great_circle_distance" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Great_circle_distance</a></p>
+<h5 id="Examples-12"><a href="#Examples-12" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xy &lt;- rbind(c(<span class="number">0</span>,<span class="number">0</span>),c(<span class="number">90</span>,<span class="number">90</span>),c(<span class="number">10</span>,<span class="number">10</span>),c(-<span class="number">120</span>,-<span class="number">45</span>))</span><br><span class="line">distm(xy)</span><br><span class="line">xy2 &lt;- rbind(c(<span class="number">0</span>,<span class="number">0</span>),c(<span class="number">10</span>,-<span class="number">10</span>))</span><br><span class="line">distm(xy, xy2)</span><br><span class="line"></span><br><span class="line">t1=c(<span class="number">103.994191</span>,<span class="number">30.589908</span>)</span><br><span class="line">t2=c(<span class="number">103.994644</span>,<span class="number">30.588221</span>)</span><br><span class="line">aa=rbind(t1=t1,t2=t2)</span><br><span class="line">distm(aa)</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/geosphere/versions/1.5-5/topics/distm" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：dtw"><a href="#函数：dtw" class="headerlink" title="函数：dtw"></a>函数：dtw</h4><p><a href="https://www.rdocumentation.org/packages/dtw/versions/1.20-1/topics/dtw" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="F"><a href="#F" class="headerlink" title="F"></a>F</h3><h4 id="函数：fix"><a href="#函数：fix" class="headerlink" title="函数：fix"></a>函数：fix</h4><p>简介：<br>相当于可以调用工具对R对象的值进行修改，调用的工具和对象类型有关。</p>
+<h5 id="Usage-14"><a href="#Usage-14" class="headerlink" title="Usage"></a>Usage</h5><p>fix(x, …)</p>
+<h5 id="Arguments-参数-14"><a href="#Arguments-参数-14" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x</li>
+<li>…</li>
+</ul>
+<h5 id="说明-14"><a href="#说明-14" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-13"><a href="#Examples-13" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://www.rdocumentation.org/packages/utils/versions/3.5.3/topics/fix" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+<h3 id="K"><a href="#K" class="headerlink" title="K"></a>K</h3><h4 id="函数：kalmanFilter"><a href="#函数：kalmanFilter" class="headerlink" title="函数：kalmanFilter"></a>函数：kalmanFilter</h4><p><a href="https://www.rdocumentation.org/packages/pmhtutorial/versions/1.5/topics/kalmanFilter" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+<h4 id="函数：Kinhom-Track"><a href="#函数：Kinhom-Track" class="headerlink" title="函数：Kinhom.Track"></a>函数：Kinhom.Track</h4><h5 id="Usage-15"><a href="#Usage-15" class="headerlink" title="Usage"></a>Usage</h5><p>Kinhom.Track(X,timestamp,correction=c(“border”, “bord.modif”,”isotropic”,”translate”),q,sigma=c(“default”,”bw.diggle”,”bw.ppl”,” bw.scott”),…)</p>
+<h5 id="Arguments-参数-15"><a href="#Arguments-参数-15" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><h5 id="说明-15"><a href="#说明-15" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-14"><a href="#Examples-14" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://www.rdocumentation.org/packages/trajectories/versions/0.2-1/topics/Kinhom.Track" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+<h3 id="L"><a href="#L" class="headerlink" title="L"></a>L</h3><h4 id="函数：LCSS"><a href="#函数：LCSS" class="headerlink" title="函数：LCSS"></a>函数：LCSS</h4><p><a href="https://www.rdocumentation.org/packages/SimilarityMeasures/versions/1.4/topics/LCSS" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+<h3 id="N"><a href="#N" class="headerlink" title="N"></a>N</h3><h4 id="函数：names"><a href="#函数：names" class="headerlink" title="函数：names"></a>函数：names</h4><p>简介：<br>查看变量所具有的名称，或给变量修改元素名称</p>
+<h5 id="Usage-16"><a href="#Usage-16" class="headerlink" title="Usage"></a>Usage</h5><p>names(x)<br>names(x) &lt;- value</p>
+<h5 id="Arguments-参数-16"><a href="#Arguments-参数-16" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x R对象</li>
+<li>value 一个与x长度相同的字符向量，或NULL<br><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/names" target="_blank" rel="noopener">官网简介</a><hr>
+
+</li>
+</ul>
+<h5 id="说明-16"><a href="#说明-16" class="headerlink" title="说明"></a>说明</h5><p><a href="https://jingyan.baidu.com/article/22fe7cedc8813f3003617f5c.html" target="_blank" rel="noopener">使用demo</a></p>
+<h5 id="Examples-15"><a href="#Examples-15" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">z &lt;- list(a = <span class="number">1</span>, b = <span class="string">"c"</span>, c = <span class="number">1</span>:<span class="number">3</span>)</span><br><span class="line">names(z)</span><br><span class="line"><span class="comment"># change just the name of the third element.</span></span><br><span class="line">names(z)[<span class="number">3</span>] &lt;- <span class="string">"c2"</span></span><br><span class="line">z</span><br><span class="line"></span><br><span class="line">z &lt;- <span class="number">1</span>:<span class="number">3</span></span><br><span class="line">names(z)</span><br><span class="line"><span class="comment">## assign just one name</span></span><br><span class="line">names(z)[<span class="number">2</span>] &lt;- <span class="string">"b"</span></span><br><span class="line">z</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/names" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：Normal-正态"><a href="#函数：Normal-正态" class="headerlink" title="函数：Normal 正态"></a>函数：Normal 正态</h4><h5 id="Usage-17"><a href="#Usage-17" class="headerlink" title="Usage"></a>Usage</h5><p>dnorm(x, mean = 0, sd = 1, log = FALSE)<br>pnorm(q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)<br>qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)<br>rnorm(n, mean = 0, sd = 1)</p>
+<h5 id="Arguments-参数-17"><a href="#Arguments-参数-17" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x, q  vector of quantiles.</li>
+<li>p  vector of probabilities.</li>
+<li>n  number of observations. If <code>length(n) &gt; 1</code>, the length is taken to be the number required.</li>
+<li>mean  vector of means.</li>
+<li>sd</li>
+<li>log, log.p</li>
+<li>lower.tail</li>
+</ul>
+<h5 id="说明-17"><a href="#说明-17" class="headerlink" title="说明"></a>说明</h5><p><a href="https://www.rdocumentation.org/packages/stats/versions/3.5.3/topics/Normal" target="_blank" rel="noopener">资料1</a><br><a href="http://blog.sina.com.cn/s/blog_793377e50102v7og.html" target="_blank" rel="noopener">资料2</a><br><a href>资料3</a></p>
+<h5 id="Examples-16"><a href="#Examples-16" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NOT RUN &#123;</span></span><br><span class="line"><span class="keyword">require</span>(graphics)</span><br><span class="line"></span><br><span class="line">dnorm(<span class="number">0</span>) == <span class="number">1</span>/sqrt(<span class="number">2</span>*pi)</span><br><span class="line">dnorm(<span class="number">1</span>) == exp(-<span class="number">1</span>/<span class="number">2</span>)/sqrt(<span class="number">2</span>*pi)</span><br><span class="line">dnorm(<span class="number">1</span>) == <span class="number">1</span>/sqrt(<span class="number">2</span>*pi*exp(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">## Using "log = TRUE" for an extended range :</span></span><br><span class="line">par(mfrow = c(<span class="number">2</span>,<span class="number">1</span>))</span><br><span class="line">plot(<span class="keyword">function</span>(x) dnorm(x, log = <span class="literal">TRUE</span>), -<span class="number">60</span>, <span class="number">50</span>,</span><br><span class="line">     main = <span class="string">"log &#123; Normal density &#125;"</span>)</span><br><span class="line">curve(log(dnorm(x)), add = <span class="literal">TRUE</span>, col = <span class="string">"red"</span>, lwd = <span class="number">2</span>)</span><br><span class="line">mtext(<span class="string">"dnorm(x, log=TRUE)"</span>, adj = <span class="number">0</span>)</span><br><span class="line">mtext(<span class="string">"log(dnorm(x))"</span>, col = <span class="string">"red"</span>, adj = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">plot(<span class="keyword">function</span>(x) pnorm(x, log.p = <span class="literal">TRUE</span>), -<span class="number">50</span>, <span class="number">10</span>,</span><br><span class="line">     main = <span class="string">"log &#123; Normal Cumulative &#125;"</span>)</span><br><span class="line">curve(log(pnorm(x)), add = <span class="literal">TRUE</span>, col = <span class="string">"red"</span>, lwd = <span class="number">2</span>)</span><br><span class="line">mtext(<span class="string">"pnorm(x, log=TRUE)"</span>, adj = <span class="number">0</span>)</span><br><span class="line">mtext(<span class="string">"log(pnorm(x))"</span>, col = <span class="string">"red"</span>, adj = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## if you want the so-called 'error function'</span></span><br><span class="line">erf &lt;- <span class="keyword">function</span>(x) <span class="number">2</span> * pnorm(x * sqrt(<span class="number">2</span>)) - <span class="number">1</span></span><br><span class="line"><span class="comment">## (see Abramowitz and Stegun 29.2.29)</span></span><br><span class="line"><span class="comment">## and the so-called 'complementary error function'</span></span><br><span class="line">erfc &lt;- <span class="keyword">function</span>(x) <span class="number">2</span> * pnorm(x * sqrt(<span class="number">2</span>), lower = <span class="literal">FALSE</span>)</span><br><span class="line"><span class="comment">## and the inverses</span></span><br><span class="line">erfinv &lt;- <span class="keyword">function</span> (x) qnorm((<span class="number">1</span> + x)/<span class="number">2</span>)/sqrt(<span class="number">2</span>)</span><br><span class="line">erfcinv &lt;- <span class="keyword">function</span> (x) qnorm(x/<span class="number">2</span>, lower = <span class="literal">FALSE</span>)/sqrt(<span class="number">2</span>)</span><br><span class="line"><span class="comment"># &#125;</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/stats/versions/3.5.3/topics/Normal" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+<h3 id="M"><a href="#M" class="headerlink" title="M"></a>M</h3><h4 id="函数：merge"><a href="#函数：merge" class="headerlink" title="函数：merge"></a>函数：merge</h4><h5 id="Usage-18"><a href="#Usage-18" class="headerlink" title="Usage"></a>Usage</h5><p>merge(x, y, …)<br><code># S3 method for default</code><br>merge(x, y, …)<br><code># S3 method for data.frame</code><br>merge(x, y, by = intersect(names(x), names(y)),<br>      by.x = by, by.y = by, all = FALSE, all.x = all, all.y = all,<br>      sort = TRUE, suffixes = c(“.x”,”.y”), no.dups = TRUE,<br>      incomparables = NULL, …)</p>
+<h5 id="Arguments-参数-18"><a href="#Arguments-参数-18" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x, y</li>
+<li>by, by.x, by.y</li>
+<li>all</li>
+<li>all.x</li>
+<li>all.y</li>
+<li>sort</li>
+<li>suffixes</li>
+<li>no.dups</li>
+<li>incomparables</li>
+<li>…</li>
+</ul>
+<h5 id="说明-18"><a href="#说明-18" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-17"><a href="#Examples-17" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"># NOT RUN &#123;</span><br><span class="line">authors &lt;- data.frame(</span><br><span class="line">    ## I(*) : use character columns of names to get sensible sort order</span><br><span class="line">    surname = I(c(&quot;Tukey&quot;, &quot;Venables&quot;, &quot;Tierney&quot;, &quot;Ripley&quot;, &quot;McNeil&quot;)),</span><br><span class="line">    nationality = c(&quot;US&quot;, &quot;Australia&quot;, &quot;US&quot;, &quot;UK&quot;, &quot;Australia&quot;),</span><br><span class="line">    deceased = c(&quot;yes&quot;, rep(&quot;no&quot;, 4)))</span><br><span class="line">authorN &lt;- within(authors, &#123; name &lt;- surname; rm(surname) &#125;)</span><br><span class="line">books &lt;- data.frame(</span><br><span class="line">    name = I(c(&quot;Tukey&quot;, &quot;Venables&quot;, &quot;Tierney&quot;,</span><br><span class="line">             &quot;Ripley&quot;, &quot;Ripley&quot;, &quot;McNeil&quot;, &quot;R Core&quot;)),</span><br><span class="line">    title = c(&quot;Exploratory Data Analysis&quot;,</span><br><span class="line">              &quot;Modern Applied Statistics ...&quot;,</span><br><span class="line">              &quot;LISP-STAT&quot;,</span><br><span class="line">              &quot;Spatial Statistics&quot;, &quot;Stochastic Simulation&quot;,</span><br><span class="line">              &quot;Interactive Data Analysis&quot;,</span><br><span class="line">              &quot;An Introduction to R&quot;),</span><br><span class="line">    other.author = c(NA, &quot;Ripley&quot;, NA, NA, NA, NA,</span><br><span class="line">                     &quot;Venables &amp; Smith&quot;))</span><br><span class="line"></span><br><span class="line">(m0 &lt;- merge(authorN, books))</span><br><span class="line">(m1 &lt;- merge(authors, books, by.x = &quot;surname&quot;, by.y = &quot;name&quot;))</span><br><span class="line"> m2 &lt;- merge(books, authors, by.x = &quot;name&quot;, by.y = &quot;surname&quot;)</span><br><span class="line">stopifnot(exprs = &#123;</span><br><span class="line">   identical(m0, m2[, names(m0)])</span><br><span class="line">   as.character(m1[, 1]) == as.character(m2[, 1])</span><br><span class="line">   all.equal(m1[, -1], m2[, -1][ names(m1)[-1] ])</span><br><span class="line">   identical(dim(merge(m1, m2, by = NULL)),</span><br><span class="line">             c(nrow(m1)*nrow(m2), ncol(m1)+ncol(m2)))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">## &quot;R core&quot; is missing from authors and appears only here :</span><br><span class="line">merge(authors, books, by.x = &quot;surname&quot;, by.y = &quot;name&quot;, all = TRUE)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## example of using &apos;incomparables&apos;</span><br><span class="line">x &lt;- data.frame(k1 = c(NA,NA,3,4,5), k2 = c(1,NA,NA,4,5), data = 1:5)</span><br><span class="line">y &lt;- data.frame(k1 = c(NA,2,NA,4,5), k2 = c(NA,NA,3,4,5), data = 1:5)</span><br><span class="line">merge(x, y, by = c(&quot;k1&quot;,&quot;k2&quot;)) # NA&apos;s match</span><br><span class="line">merge(x, y, by = &quot;k1&quot;) # NA&apos;s match, so 6 rows</span><br><span class="line">merge(x, y, by = &quot;k2&quot;, incomparables = NA) # 2 rows</span><br><span class="line"># &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/merge" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+<h3 id="O"><a href="#O" class="headerlink" title="O"></a>O</h3><h4 id="函数：outer"><a href="#函数：outer" class="headerlink" title="函数：outer"></a>函数：outer</h4><p>简介：<br>The outer product of the arrays X and Y is the array A with dimension c(dim(X), dim(Y)) where element A[c(arrayindex.x, arrayindex.y)] = FUN(X[arrayindex.x], Y[arrayindex.y], …).<br>数组X和Y的外积是数组A，则数组A的维度是c(dim(X), dim(Y))<br>元素 A[c(arrayindex.x, arrayindex.y)] = FUN(X[arrayindex.x], Y[arrayindex.y], …)</p>
+<h5 id="Usage-19"><a href="#Usage-19" class="headerlink" title="Usage"></a>Usage</h5><p>outer(X, Y, FUN = “*”, …)<br>X %o% Y</p>
+<h5 id="Arguments-参数-19"><a href="#Arguments-参数-19" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>X, Y</li>
+<li>FUN</li>
+</ul>
+<h5 id="说明-19"><a href="#说明-19" class="headerlink" title="说明"></a>说明</h5><p>X %o% Y ：<img src="https://upload-images.jianshu.io/upload_images/6310069-7a911f09364e31e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h5 id="Examples-18"><a href="#Examples-18" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;test1 &lt;- 1:9</span><br><span class="line">&gt;test2 &lt;- 1:2</span><br><span class="line">&gt; outer(test2, test1, &quot;^&quot;)</span><br><span class="line">     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]</span><br><span class="line">[1,]    1    1    1    1    1    1    1    1    1</span><br><span class="line">[2,]    2    4    8   16   32   64  128  256  512</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/outer" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+<h3 id="P"><a href="#P" class="headerlink" title="P"></a>P</h3><h4 id="函数：par"><a href="#函数：par" class="headerlink" title="函数：par"></a>函数：par</h4><h5 id="Usage-20"><a href="#Usage-20" class="headerlink" title="Usage"></a>Usage</h5><p>par(…, no.readonly = FALSE)<br> (…,  = )</p>
+<h5 id="Arguments-参数-20"><a href="#Arguments-参数-20" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>…</li>
+<li>no.readonly</li>
+</ul>
+<h5 id="说明-20"><a href="#说明-20" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-19"><a href="#Examples-19" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NOT RUN &#123;</span></span><br><span class="line">op &lt;- par(mfrow = c(<span class="number">2</span>, <span class="number">2</span>), <span class="comment"># 2 x 2 pictures on one plot</span></span><br><span class="line">          pty = <span class="string">"s"</span>)       <span class="comment"># square plotting region,</span></span><br><span class="line">                           <span class="comment"># independent of device size</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## At end of plotting, reset to previous settings:</span></span><br><span class="line">par(op)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Alternatively,</span></span><br><span class="line">op &lt;- par(no.readonly = <span class="literal">TRUE</span>) <span class="comment"># the whole list of settable par's.</span></span><br><span class="line"><span class="comment">## do lots of plotting and par(.) calls, then reset:</span></span><br><span class="line">par(op)</span><br><span class="line"><span class="comment">## Note this is not in general good practice</span></span><br><span class="line"></span><br><span class="line">par(<span class="string">"ylog"</span>) <span class="comment"># FALSE</span></span><br><span class="line">plot(<span class="number">1</span> : <span class="number">12</span>, log = <span class="string">"y"</span>)</span><br><span class="line">par(<span class="string">"ylog"</span>) <span class="comment"># TRUE</span></span><br><span class="line"></span><br><span class="line">plot(<span class="number">1</span>:<span class="number">2</span>, xaxs = <span class="string">"i"</span>) <span class="comment"># 'inner axis' w/o extra space</span></span><br><span class="line">par(c(<span class="string">"usr"</span>, <span class="string">"xaxp"</span>))</span><br><span class="line"></span><br><span class="line">( nr.prof &lt;-</span><br><span class="line">c(prof.pilots = <span class="number">16</span>, lawyers = <span class="number">11</span>, farmers = <span class="number">10</span>, salesmen = <span class="number">9</span>, physicians = <span class="number">9</span>,</span><br><span class="line">  mechanics = <span class="number">6</span>, policemen = <span class="number">6</span>, managers = <span class="number">6</span>, engineers = <span class="number">5</span>, teachers = <span class="number">4</span>,</span><br><span class="line">  housewives = <span class="number">3</span>, students = <span class="number">3</span>, armed.forces = <span class="number">1</span>))</span><br><span class="line">par(las = <span class="number">3</span>)</span><br><span class="line">barplot(rbind(nr.prof)) <span class="comment"># R 0.63.2: shows alignment problem</span></span><br><span class="line">par(las = <span class="number">0</span>)  <span class="comment"># reset to default</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span>(grDevices) <span class="comment"># for gray</span></span><br><span class="line"><span class="comment">## 'fg' use:</span></span><br><span class="line">plot(<span class="number">1</span>:<span class="number">12</span>, type = <span class="string">"b"</span>, main = <span class="string">"'fg' : axes, ticks and box in gray"</span>,</span><br><span class="line">     fg = gray(<span class="number">0.7</span>), bty = <span class="string">"7"</span> , sub = R.version.string)</span><br><span class="line"></span><br><span class="line">ex &lt;- <span class="keyword">function</span>() &#123;</span><br><span class="line">   old.par &lt;- par(no.readonly = <span class="literal">TRUE</span>) <span class="comment"># all par settings which</span></span><br><span class="line">                                      <span class="comment"># could be changed.</span></span><br><span class="line">   on.exit(par(old.par))</span><br><span class="line">   <span class="comment">## ...</span></span><br><span class="line">   <span class="comment">## ... do lots of par() settings and plots</span></span><br><span class="line">   <span class="comment">## ...</span></span><br><span class="line">   invisible() <span class="comment">#-- now,  par(old.par)  will be executed</span></span><br><span class="line">&#125;</span><br><span class="line">ex()</span><br><span class="line"></span><br><span class="line"><span class="comment">## Line types</span></span><br><span class="line">showLty &lt;- <span class="keyword">function</span>(ltys, xoff = <span class="number">0</span>, <span class="keyword">...</span>) &#123;</span><br><span class="line">   stopifnot((n &lt;- length(ltys)) &gt;= <span class="number">1</span>)</span><br><span class="line">   op &lt;- par(mar = rep(<span class="number">.5</span>,<span class="number">4</span>)); on.exit(par(op))</span><br><span class="line">   plot(<span class="number">0</span>:<span class="number">1</span>, <span class="number">0</span>:<span class="number">1</span>, type = <span class="string">"n"</span>, axes = <span class="literal">FALSE</span>, ann = <span class="literal">FALSE</span>)</span><br><span class="line">   y &lt;- (n:<span class="number">1</span>)/(n+<span class="number">1</span>)</span><br><span class="line">   clty &lt;- as.character(ltys)</span><br><span class="line">   mytext &lt;- <span class="keyword">function</span>(x, y, txt)</span><br><span class="line">      text(x, y, txt, adj = c(<span class="number">0</span>, -<span class="number">.3</span>), cex = <span class="number">0.8</span>, <span class="keyword">...</span>)</span><br><span class="line">   abline(h = y, lty = ltys, <span class="keyword">...</span>); mytext(xoff, y, clty)</span><br><span class="line">   y &lt;- y - <span class="number">1</span>/(<span class="number">3</span>*(n+<span class="number">1</span>))</span><br><span class="line">   abline(h = y, lty = ltys, lwd = <span class="number">2</span>, <span class="keyword">...</span>)</span><br><span class="line">   mytext(<span class="number">1</span>/<span class="number">8</span>+xoff, y, paste(clty,<span class="string">" lwd = 2"</span>))</span><br><span class="line">&#125;</span><br><span class="line">showLty(c(<span class="string">"solid"</span>, <span class="string">"dashed"</span>, <span class="string">"dotted"</span>, <span class="string">"dotdash"</span>, <span class="string">"longdash"</span>, <span class="string">"twodash"</span>))</span><br><span class="line">par(new = <span class="literal">TRUE</span>)  <span class="comment"># the same:</span></span><br><span class="line">showLty(c(<span class="string">"solid"</span>, <span class="string">"44"</span>, <span class="string">"13"</span>, <span class="string">"1343"</span>, <span class="string">"73"</span>, <span class="string">"2262"</span>), xoff = <span class="number">.2</span>, col = <span class="number">2</span>)</span><br><span class="line">showLty(c(<span class="string">"11"</span>, <span class="string">"22"</span>, <span class="string">"33"</span>, <span class="string">"44"</span>,   <span class="string">"12"</span>, <span class="string">"13"</span>, <span class="string">"14"</span>,   <span class="string">"21"</span>, <span class="string">"31"</span>))</span><br><span class="line"><span class="comment"># &#125;</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/graphics/versions/3.5.3/topics/par" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：paste"><a href="#函数：paste" class="headerlink" title="函数：paste"></a>函数：paste</h4><p><a href="https://stackoverflow.com/questions/36279800/difference-between-paste-and-paste0" target="_blank" rel="noopener">difference-between-paste-and-paste0</a></p>
+<h5 id="Usage-21"><a href="#Usage-21" class="headerlink" title="Usage"></a>Usage</h5><p>paste (…, sep = “ “, collapse = NULL)<br>paste0(…, collapse = NULL)</p>
+<h5 id="Arguments-参数-21"><a href="#Arguments-参数-21" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>…<br>one or more R objects, to be converted to character vectors.<br>字符向量，用“,”分隔</li>
+<li>sep<br>a character string to separate the terms. Not NA_character_.<br>用于分割的字符串</li>
+<li>collapse<br>an optional character string to separate the results. Not NA_character_.<br>连接符</li>
+</ul>
+<h5 id="说明-21"><a href="#说明-21" class="headerlink" title="说明"></a>说明</h5><p>会将传入的n个向量进行连接，连接次数以向量中分量最多的向量为准，其它向量则循环使用。<br>sep用来分隔（连接）分量，collapse用来将连接后的分量进行连接为一个字符串。<br>比如一个向量为（a,b,c,d），另一个向量为（1,2,3），还有（1）。<br>则连接次数为4。<br>（1，2，3）则循环为：1，2，3，1<br>（1）则循环为：1，1，1，1<br>如果不设置参数，则为：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; paste(c(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>),c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),<span class="number">1</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"a 1 1"</span> <span class="string">"b 2 1"</span> <span class="string">"c 3 1"</span> <span class="string">"d 1 1"</span></span><br></pre></td></tr></table></figure></p>
+<p>如果设置参数，比如sep=‘_’，则：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; paste(c(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>),c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),<span class="number">1</span>,sep = <span class="string">'_'</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"a_1_1"</span> <span class="string">"b_2_1"</span> <span class="string">"c_3_1"</span> <span class="string">"d_1_1"</span></span><br></pre></td></tr></table></figure></p>
+<p>如果设置参数，比如sep=‘_’，collapse=’&amp;’则：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; paste(c(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>),c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),<span class="number">1</span>,sep = <span class="string">'_'</span>,collapse=<span class="string">'&amp;'</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"a_1_1&amp;b_2_1&amp;c_3_1&amp;d_1_1"</span></span><br></pre></td></tr></table></figure></p>
+<h6 id="Examples-20"><a href="#Examples-20" class="headerlink" title="Examples"></a>Examples</h6><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; paste(<span class="string">'one'</span>,<span class="number">2</span>,<span class="string">'three'</span>,<span class="number">4</span>,<span class="string">'five'</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"one 2 three 4 five"</span></span><br><span class="line">&gt; paste(<span class="string">'X'</span>,<span class="number">1</span>:<span class="number">5</span>,sep=<span class="string">''</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"X1"</span> <span class="string">"X2"</span> <span class="string">"X3"</span> <span class="string">"X4"</span> <span class="string">"X5"</span></span><br><span class="line">&gt; paste(c(<span class="string">'one'</span>,<span class="string">'two'</span>,<span class="string">'three'</span>,<span class="string">'four'</span>),collapse=<span class="string">' and '</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"one and two and three and four"</span></span><br><span class="line">&gt; paste(c(<span class="string">'X'</span>,<span class="string">'Y'</span>),<span class="number">1</span>:<span class="number">5</span>,sep=<span class="string">'_'</span>,collapse=<span class="string">' and '</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"X_1 and Y_2 and X_3 and Y_4 and X_5"</span></span><br><span class="line">&gt; paste(<span class="number">1</span>:<span class="number">5</span>,<span class="number">6</span>:<span class="number">9</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"1 6"</span> <span class="string">"2 7"</span> <span class="string">"3 8"</span> <span class="string">"4 9"</span> <span class="string">"5 6"</span></span><br><span class="line">&gt; paste(<span class="number">1</span>:<span class="number">5</span>,<span class="number">6</span>:<span class="number">9</span>,<span class="number">10</span>:<span class="number">11</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"1 6 10"</span> <span class="string">"2 7 11"</span> <span class="string">"3 8 10"</span> <span class="string">"4 9 11"</span> <span class="string">"5 6 10"</span></span><br><span class="line">&gt; paste(<span class="number">1</span>:<span class="number">2</span>,<span class="number">6</span>:<span class="number">9</span>,<span class="number">10</span>:<span class="number">11</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"1 6 10"</span> <span class="string">"2 7 11"</span> <span class="string">"1 8 10"</span> <span class="string">"2 9 11"</span></span><br><span class="line">&gt; paste(<span class="number">1</span>:<span class="number">2</span>,<span class="number">6</span>:<span class="number">9</span>,sep=<span class="string">'_'</span>,collapse=<span class="string">' and '</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"1_6 and 2_7 and 1_8 and 2_9"</span></span><br><span class="line">&gt; paste(<span class="number">1</span>:<span class="number">2</span>,<span class="number">6</span>:<span class="number">9</span>,<span class="number">10</span>:<span class="number">11</span>,sep=<span class="string">'_'</span>,collapse=<span class="string">' and '</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">"1_6_10 and 2_7_11 and 1_8_10 and 2_9_11"</span></span><br></pre></td></tr></table></figure>
+<p><a href>官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+<h4 id="函数：plot"><a href="#函数：plot" class="headerlink" title="函数：plot"></a>函数：plot</h4><p>画图函数</p>
+<h5 id="Usage-22"><a href="#Usage-22" class="headerlink" title="Usage"></a>Usage</h5><p>plot(x, y, …)</p>
+<h5 id="Arguments-参数-22"><a href="#Arguments-参数-22" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li><p>x  plot中点的坐标。或者，任何可以提供单个绘图结构，函数或具有绘图方法的R对象。</p>
+</li>
+<li><p>y  plot中点的y坐标，如果x是合适的结构（比如包含了完善的位置信息），则可以没有y。</p>
+</li>
+<li><p>… 传递给方法的参数，比如 <a href="https://www.rdocumentation.org/link/graphical%20parameters?package=graphics&amp;version=3.5.3" target="_blank" rel="noopener">graphical parameters</a> (see <code>par</code>)。许多方法接受以下参数：</p>
+<ul>
+<li><p>type  plot应该画什么类型的图形，可能是以下图形中的一种：</p>
+<ul>
+<li><code>&quot;p&quot;</code>  点</li>
+<li><code>&quot;l&quot;</code>  线</li>
+<li><code>&quot;b&quot;</code> for <strong>b</strong>oth,</li>
+<li><code>&quot;c&quot;</code> for the lines part alone of <code>&quot;b&quot;</code>,</li>
+<li><code>&quot;o&quot;</code> for both ‘<strong>o</strong>verplotted’,</li>
+<li><code>&quot;h&quot;</code> 直方图 like (or ‘high-density’) vertical lines,</li>
+<li><code>&quot;s&quot;</code> 阶梯图</li>
+<li><code>&quot;S&quot;</code> for other <strong>s</strong>teps, see ‘Details’ below,</li>
+<li><code>&quot;n&quot;</code> for no plotting.</li>
+</ul>
+</li>
+<li><p><code>main</code>  画出的图的标题: see <code>title</code>.</p>
+</li>
+<li><code>sub</code>    子标题: see <code>title</code>.</li>
+<li><code>xlab</code>   x轴标题: see <code>title</code>.</li>
+<li><code>ylab</code>   y轴标题: see <code>title</code>.</li>
+<li><code>asp</code>     y / x纵横比, see <code>plot.window</code>.</li>
+</ul>
+</li>
+</ul>
+<h5 id="说明-22"><a href="#说明-22" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-21"><a href="#Examples-21" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"># NOT RUN &#123;</span><br><span class="line">require(stats) # for lowess, rpois, rnorm</span><br><span class="line">plot(cars)</span><br><span class="line">lines(lowess(cars))</span><br><span class="line"></span><br><span class="line">plot(sin, -pi, 2*pi) # see ?plot.function</span><br><span class="line"></span><br><span class="line">## Discrete Distribution Plot:</span><br><span class="line">plot(table(rpois(100, 5)), type = &quot;h&quot;, col = &quot;red&quot;, lwd = 10,</span><br><span class="line">     main = &quot;rpois(100, lambda = 5)&quot;)</span><br><span class="line"></span><br><span class="line">## Simple quantiles/ECDF, see ecdf() &#123;library(stats)&#125; for a better one:</span><br><span class="line">plot(x &lt;- sort(rnorm(47)), type = &quot;s&quot;, main = &quot;plot(x, type = \&quot;s\&quot;)&quot;)</span><br><span class="line">points(x, cex = .5, col = &quot;dark red&quot;)</span><br><span class="line"># &#125;</span><br><span class="line"></span><br><span class="line">plot(1:100, (1:100) ^ 2, main = &quot;plot(1:100, (1:100) ^ 2)&quot;)</span><br><span class="line"></span><br><span class="line">plot(</span><br><span class="line">  1:25, </span><br><span class="line">  cex  = 3,</span><br><span class="line">  lwd  = 3,</span><br><span class="line">  pch  = 1:25, </span><br><span class="line">  col  = rainbow(25), </span><br><span class="line">  bg   = c(rep(NA, 20), terrain.colors(5)),</span><br><span class="line">  main = &quot;plot(1:25, pch = 1:25, ...)&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">plot(</span><br><span class="line">  (1:100) ^ 2, </span><br><span class="line">  type = &quot;l&quot;, </span><br><span class="line">  main = &apos;plot((1:100) ^ 2, type = &quot;l&quot;)&apos;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">plot(</span><br><span class="line">  (1:100) ^ 2, </span><br><span class="line">  type = &quot;l&quot;, </span><br><span class="line">  lty  = &quot;dashed&quot;,</span><br><span class="line">  lwd  = 3,</span><br><span class="line">  col  = &quot;chocolate&quot;, </span><br><span class="line">  main = &apos;plot((1:100) ^ 2, type = &quot;l&quot;, lty = &quot;dashed&quot;, ...)&apos;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">with(</span><br><span class="line">  cars, </span><br><span class="line">  plot(speed, dist, main = &quot;with(cars, plot(speed, dist))&quot;)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">官网案例挺多的</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/graphics/versions/3.5.3/topics/plot" target="_blank" rel="noopener">官网简介</a><br><a href="https://www.cnblogs.com/wutongyuhou/p/5873056.html" target="_blank" rel="noopener">参考资料1–R语言plot函数参数合集</a></p>
+<hr>
+
+
+
+
+
+
+
+
+<h3 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h3><h4 id="函数：q1"><a href="#函数：q1" class="headerlink" title="函数：q1"></a>函数：q1</h4><h5 id="Usage-23"><a href="#Usage-23" class="headerlink" title="Usage"></a>Usage</h5><p>rep(x, …)<br>rep.int(x, times)<br>rep_len(x, length.out)</p>
+<h5 id="Arguments-参数-23"><a href="#Arguments-参数-23" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x<br>a vector (of any mode including a list) or a factor or (for rep only) a POSIXct or POSIXlt or Date object; or an S4 object containing such an object.</li>
+<li>…<br>further arguments to be passed to or from other methods. For the internal default method these can include:<br>times<br>an integer-valued vector giving the (non-negative) number of times to repeat each element if of length length(x), or to repeat the whole vector if of length 1. Negative or NA values are an error. A double vector is accepted, other inputs being coerced to an integer or double vector.<br>length.out<br>non-negative integer. The desired length of the output vector. Other inputs will be coerced to a double vector and the first element taken. Ignored if NA or invalid.<br>each<br>non-negative integer. Each element of x is repeated each times. Other inputs will be coerced to an integer or double vector and the first element taken. Treated as 1 if NA or invalid.</li>
+<li>times, length.out<br>see … above</li>
+</ul>
+<h5 id="说明-23"><a href="#说明-23" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-22"><a href="#Examples-22" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/rep" target="_blank" rel="noopener">官网简介</a></p>
+<h3 id="R"><a href="#R" class="headerlink" title="R"></a>R</h3><h4 id="函数：rep"><a href="#函数：rep" class="headerlink" title="函数：rep"></a>函数：rep</h4><h5 id="Usage-24"><a href="#Usage-24" class="headerlink" title="Usage"></a>Usage</h5><p>rep(x, …)<br>rep.int(x, times)<br>rep_len(x, length.out)</p>
+<h5 id="Arguments-参数-24"><a href="#Arguments-参数-24" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x</li>
+<li>…<br>times：each处理后的重复次数<br>len：总分量个数<br>each：每个重复多少次</li>
+<li>times, length.out</li>
+</ul>
+<h5 id="说明-24"><a href="#说明-24" class="headerlink" title="说明"></a>说明</h5><p>依次把值赋值给 times -&gt; len -&gt; each<br>作用的优先级是 len &gt; times &gt; each<br>即先each生成一个向量，然后times处理后生成一个向量，最后len处理得到最终的向量</p>
+<h5 id="Examples-23"><a href="#Examples-23" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">rep(2:5, 2) </span><br><span class="line">rep(2:5, 2,2,2,2)</span><br><span class="line"></span><br><span class="line">rep(2:5, 2,2,2)</span><br><span class="line"># 依次把值赋值给 times -&gt; len -&gt; each</span><br><span class="line"># 作用的优先级是 len &gt; times &gt; each</span><br><span class="line"># 即先each生成一个向量，然后times处理后生成一个向量，最后len处理得到最终的向量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># NOT RUN &#123;</span><br><span class="line">rep(1:4, 2)</span><br><span class="line">rep(1:4, each = 2, len = 4)       # not the same.</span><br><span class="line">rep(1:4, c(2,2,2,2), len = 4)     # same as second.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">rep(1:4, c(2,1,2,1), len = 4)</span><br><span class="line"></span><br><span class="line">rep(1:4, each = 2, len = 4)    # first 4 only.</span><br><span class="line">rep(1:4, each = 2, len = 10)   # 8 integers plus two recycled 1&apos;s.</span><br><span class="line">rep(1:4, each = 2, times = 3)  # length 24, 3 complete replications</span><br><span class="line">rep(1:4, each = 2, times = 3,len =10)  # length 24, 3 complete replications</span><br><span class="line"></span><br><span class="line">rep(1, 40*(1-.8)) # length 7 on most platforms</span><br><span class="line">rep(1, 40*(1-.8)+1e-7) # better</span><br><span class="line"></span><br><span class="line">## replicate a list</span><br><span class="line">fred &lt;- list(happy = 1:10, name = &quot;squash&quot;)</span><br><span class="line">rep(fred, 5)</span><br><span class="line"></span><br><span class="line"># date-time objects</span><br><span class="line">x &lt;- .leap.seconds[1:3]</span><br><span class="line">rep(x, 2)</span><br><span class="line">rep(as.POSIXlt(x), rep(2, 3))</span><br><span class="line"></span><br><span class="line">## named factor</span><br><span class="line">x &lt;- factor(LETTERS[1:4]); names(x) &lt;- letters[1:4]</span><br><span class="line">x</span><br><span class="line">rep(x, 2)</span><br><span class="line">rep(x, each = 2)</span><br><span class="line">rep.int(x, 2)  # no names</span><br><span class="line">rep_len(x, 10)</span><br><span class="line"># &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/rep" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+<h4 id="函数：rnorm"><a href="#函数：rnorm" class="headerlink" title="函数：rnorm"></a>函数：rnorm</h4><h5 id="Usage-25"><a href="#Usage-25" class="headerlink" title="Usage"></a>Usage</h5><p>rnorm.acomp(n,mean,var)<br>rnorm.rcomp(n,mean,var)<br>rnorm.aplus(n,mean,var)<br>rnorm.rplus(n,mean,var)<br>rnorm.rmult(n,mean,var)<br>rnorm.ccomp(n,mean,var,lambda)<br>dnorm.acomp(x,mean,var)<br>dnorm.aplus(x,mean,var)<br>dnorm.rmult(x,mean,var)</p>
+<h5 id="Arguments-参数-25"><a href="#Arguments-参数-25" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li><p>n     要模拟的数据集数量</p>
+</li>
+<li><p>mean  要模拟的数据集的平均值</p>
+</li>
+<li><p>var   方差协方差矩阵</p>
+</li>
+<li><p>lambda  预计总数</p>
+</li>
+<li><p>x   采样空间中的向量</p>
+</li>
+</ul>
+<h5 id="说明-25"><a href="#说明-25" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-24"><a href="#Examples-24" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NOT RUN &#123;</span></span><br><span class="line">MyVar &lt;- matrix(c(</span><br><span class="line"><span class="number">0.2</span>,<span class="number">0.1</span>,<span class="number">0.0</span>,</span><br><span class="line"><span class="number">0.1</span>,<span class="number">0.2</span>,<span class="number">0.0</span>,</span><br><span class="line"><span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.2</span>),byrow=<span class="literal">TRUE</span>,nrow=<span class="number">3</span>)</span><br><span class="line">MyMean &lt;- c(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">plot(rnorm.acomp(<span class="number">100</span>,MyMean,MyVar))</span><br><span class="line">plot(rnorm.rcomp(<span class="number">100</span>,MyMean,MyVar))</span><br><span class="line">plot(rnorm.aplus(<span class="number">100</span>,MyMean,MyVar))</span><br><span class="line">plot(rnorm.rplus(<span class="number">100</span>,MyMean,MyVar))</span><br><span class="line">plot(rnorm.rmult(<span class="number">100</span>,MyMean,MyVar))</span><br><span class="line">x &lt;- rnorm.aplus(<span class="number">5</span>,MyMean,MyVar)</span><br><span class="line">dnorm.acomp(x,MyMean,MyVar)</span><br><span class="line">dnorm.aplus(x,MyMean,MyVar)</span><br><span class="line">dnorm.rmult(x,MyMean,MyVar)</span><br><span class="line"><span class="comment"># &#125;</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/compositions/versions/1.40-2/topics/rnorm" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+<h3 id="S"><a href="#S" class="headerlink" title="S"></a>S</h3><h4 id="函数：sample"><a href="#函数：sample" class="headerlink" title="函数：sample"></a>函数：sample</h4><h5 id="Usage-26"><a href="#Usage-26" class="headerlink" title="Usage"></a>Usage</h5><p>sample(x, size, replace = FALSE, prob = NULL)<br>sample.int(n, size = n, replace = FALSE, prob = NULL,<br>           useHash = (!replace &amp;&amp; is.null(prob) &amp;&amp; size &lt;= 2=”” n=”” &amp;&amp;=””&gt; 1e7))</p>
+<h5 id="Arguments-参数-26"><a href="#Arguments-参数-26" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x ：提供的采样范围、训练集</li>
+<li>n  ：最终需要</li>
+<li>size ：总计需要抽取多少个样本</li>
+<li>replace ：是否放回，如果是，则抽出的结果可能有重复的，反之，则没有</li>
+<li>prob ：概率</li>
+<li>useHash ：</li>
+</ul>
+<h5 id="说明-26"><a href="#说明-26" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-25"><a href="#Examples-25" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># NOT RUN &#123;</span><br><span class="line">x &lt;- 1:12</span><br><span class="line"># a random permutation</span><br><span class="line">sample(x)</span><br><span class="line"># bootstrap resampling -- only if length(x) &gt; 1 !</span><br><span class="line">sample(x, replace = TRUE) #相当于有重复的组合，用的是x中的元素</span><br><span class="line"></span><br><span class="line"># 100 Bernoulli trials</span><br><span class="line">sample(c(0,1), 100, replace = TRUE)</span><br><span class="line"></span><br><span class="line">## More careful bootstrapping --  Consider this when using sample()</span><br><span class="line">## programmatically (i.e., in your function or simulation)!</span><br><span class="line"></span><br><span class="line"># sample()&apos;s surprise -- example</span><br><span class="line">x &lt;- 1:10</span><br><span class="line">sample(x[x &gt;  8]) # length 2</span><br><span class="line">sample(x[x &gt;  9]) # oops -- length 10!</span><br><span class="line">sample(x[x &gt; 10]) # length 0</span><br><span class="line"></span><br><span class="line">## safer version:</span><br><span class="line">resample &lt;- function(x, ...) x[sample.int(length(x), ...)]</span><br><span class="line">resample(x[x &gt;  8]) # length 2</span><br><span class="line">resample(x[x &gt;  9]) # length 1</span><br><span class="line">resample(x[x &gt; 10]) # length 0</span><br><span class="line"></span><br><span class="line">## R 3.x.y only</span><br><span class="line">sample.int(1e10, 12, replace = TRUE)</span><br><span class="line">sample.int(1e10, 12) # not that there is much chance of duplicates</span><br><span class="line"># &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/sample" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：scale"><a href="#函数：scale" class="headerlink" title="函数：scale"></a>函数：scale</h4><h5 id="Usage-27"><a href="#Usage-27" class="headerlink" title="Usage"></a>Usage</h5><p>scale(x, center = TRUE, scale = TRUE)</p>
+<h5 id="Arguments-参数-27"><a href="#Arguments-参数-27" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x 数字矩阵</li>
+<li>center  长度等于x的列数的逻辑值或类似数字的向量，其中’numeric-alike’表示如果is.numeric（）不为true，即不为数字，则as.numeric（）将应用，即强制转换为数字。</li>
+<li>scale  长度等于x的列数的逻辑值或类似数字的向量</li>
+</ul>
+<h5 id="说明-27"><a href="#说明-27" class="headerlink" title="说明"></a>说明</h5><p>在我们做数据的时候，一个数据会有很多特征；比如在描述影响房价的因素，有房子面积，房间数量等。而不同的特征存在不同的量纲，为了消除量纲、数值差异等，我们就需要对数据进行中心化和标准化；</p>
+<p>那什么是中心化，什么是标准化呢？<br>所谓中心化就是将数据减去均值后得到的，比如有一组数据(1，2，3，4，5，6，7)，它的均值是4，中心化后的数据为(-3，-2，-1，0，1，2，3)<br>而标准化则是在中心化后的数据基础上再除以数据的标准差<br>在R语言中可以通过scale函数直接进行数据的中心化和标准化，具体如下：</p>
+<p>Scale(x,center,scale)<br>参数解释：x—即需要标准化的数据<br>                 center—表示是否进行中心化<br>                 scale—表示是否进行标准化</p>
+<p>1、数据的中心化<br>所谓数据的中心化是指数据集中的各项数据减去数据集的均值。<br>例如有数据集1, 2, 3, 6, 3，其均值为3<br>那么中心化之后的数据集为1-3,2-3,3-3,6-3,3-3，即：-2,-1,0,3,0</p>
+<p>2、数据的标准化<br>所谓数据的标准化是指中心化之后的数据在除以数据集的标准差，即数据集中的各项数据减去数据集的均值再除以数据集的标准差。<br>例如有数据集1, 2, 3, 6, 3，其均值为3，其标准差为1.87<br>那么标准化之后的数据集为(1-3)/1.87,(2-3)/1.87,(3-3)/1.87,(6-3)/1.87,(3-3)/1.87，即：-1.069,-0.535,0,1.604,0</p>
+<h5 id="Examples-26"><a href="#Examples-26" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/scale" target="_blank" rel="noopener">官网简介</a><br><a href="https://www.cnblogs.com/hunttown/p/5507892.html" target="_blank" rel="noopener">参考资料1</a><br><a href="https://blog.csdn.net/baidu_28122193/article/details/78980574" target="_blank" rel="noopener">参考资料2</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：seq"><a href="#函数：seq" class="headerlink" title="函数：seq"></a>函数：seq</h4><p><a href="https://blog.csdn.net/qq_33547243/article/details/79054112" target="_blank" rel="noopener">参考资料1</a><br><a href="https://blog.csdn.net/baidu_28122193/article/details/78980574" target="_blank" rel="noopener">参考资料2</a></p>
+<hr>
+
+<h4 id="函数：sink"><a href="#函数：sink" class="headerlink" title="函数：sink"></a>函数：sink</h4><h5 id="说明-28"><a href="#说明-28" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-27"><a href="#Examples-27" class="headerlink" title="Examples"></a>Examples</h5><p>简介：<br>sink将R的输出转移到连接（并在之后使用sink停止这种转移）<br>sink.number() 显示有多少个正在使用的连接数<br>sink.number(type = “message”)  报告当前用于错误消息的连接数</p>
+<h5 id="Usage-28"><a href="#Usage-28" class="headerlink" title="Usage"></a>Usage</h5><p>sink(file = NULL, append = FALSE, type = c(“output”, “message”),split = FALSE)<br>sink.number(type = c(“output”, “message”))</p>
+<h5 id="Arguments-参数-28"><a href="#Arguments-参数-28" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>file   a writable connection or a character string naming the file to write to, or NULL to stop sink-ing.<br>一个可写的连接或要写入的文件的文件名或NULL（用来停止sink）</li>
+<li>append<br>值为TRUE/FALSE，如果为TRUE，输出会追加到文件；否则，重写文件，不保留之前的内容（如果有的话） </li>
+<li>type<br>字符串类型，输出流或消息流，名称将部分匹配，因此可以缩写。</li>
+<li>split<br>值为TRUE/FALSE，如果为TRUE，输出将被发送到新的sink和当前的输出流，就像Unix程序tee一样。</li>
+</ul>
+<h5 id="说明-29"><a href="#说明-29" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-28"><a href="#Examples-28" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NOT RUN &#123;</span></span><br><span class="line">sink(<span class="string">"sink-examp.txt"</span>)</span><br><span class="line">i &lt;- <span class="number">1</span>:<span class="number">10</span></span><br><span class="line">outer(i, i, <span class="string">"*"</span>)</span><br><span class="line">sink()</span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"><span class="comment"># NOT RUN &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"><span class="comment"># NOT RUN &#123;</span></span><br><span class="line"><span class="comment">## capture all the output to a file.</span></span><br><span class="line">zz &lt;- file(<span class="string">"all.Rout"</span>, open = <span class="string">"wt"</span>)</span><br><span class="line">sink(zz)</span><br><span class="line">sink(zz, type = <span class="string">"message"</span>) <span class="comment">#会将日志写入输出流中去	</span></span><br><span class="line"><span class="keyword">try</span>(log(<span class="string">"a"</span>))</span><br><span class="line"><span class="comment">## revert output back to the console -- only then access the file!</span></span><br><span class="line">sink(type = <span class="string">"message"</span>)</span><br><span class="line">sink()</span><br><span class="line">file.show(<span class="string">"all.Rout"</span>)</span><br><span class="line"><span class="comment"># &#125;</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/sink" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+<h4 id="函数：-stplot"><a href="#函数：-stplot" class="headerlink" title="函数： stplot"></a>函数： stplot</h4><h5 id="Usage-29"><a href="#Usage-29" class="headerlink" title="Usage"></a>Usage</h5><h5 id="Arguments-参数-29"><a href="#Arguments-参数-29" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><h5 id="说明-30"><a href="#说明-30" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-29"><a href="#Examples-29" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://www.rdocumentation.org/packages/spacetime/versions/1.2-2/topics/stplot" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+<hr>
+<h3 id="T"><a href="#T" class="headerlink" title="T"></a>T</h3><h4 id="函数：tracks"><a href="#函数：tracks" class="headerlink" title="函数：tracks"></a>函数：tracks</h4><h5 id="Usage-30"><a href="#Usage-30" class="headerlink" title="Usage"></a>Usage</h5><h5 id="Arguments-参数-30"><a href="#Arguments-参数-30" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><h5 id="说明-31"><a href="#说明-31" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-30"><a href="#Examples-30" class="headerlink" title="Examples"></a>Examples</h5><p><a href="https://www.rdocumentation.org/packages/ggbio/versions/1.20.1/topics/tracks" target="_blank" rel="noopener">官网简介</a></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+<h3 id="U"><a href="#U" class="headerlink" title="U"></a>U</h3><h4 id="函数：unlist"><a href="#函数：unlist" class="headerlink" title="函数：unlist"></a>函数：unlist</h4><h5 id="Usage-31"><a href="#Usage-31" class="headerlink" title="Usage"></a>Usage</h5><p>unlist(x, recursive = TRUE, use.names = TRUE)</p>
+<h5 id="Arguments-参数-31"><a href="#Arguments-参数-31" class="headerlink" title="Arguments 参数"></a>Arguments 参数</h5><ul>
+<li>x   R对象，通常是列表或向量</li>
+<li>recursive   逻辑值 是否应该将非列表化应用于x的列表组件</li>
+<li>use.names   逻辑值 名字是否保留</li>
+</ul>
+<h5 id="说明-32"><a href="#说明-32" class="headerlink" title="说明"></a>说明</h5><h5 id="Examples-31"><a href="#Examples-31" class="headerlink" title="Examples"></a>Examples</h5><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NOT RUN &#123;</span></span><br><span class="line">unlist(options())</span><br><span class="line">unlist(options(), use.names = <span class="literal">FALSE</span>)</span><br><span class="line"></span><br><span class="line">l.ex &lt;- list(a = list(<span class="number">1</span>:<span class="number">5</span>, LETTERS[<span class="number">1</span>:<span class="number">5</span>]), b = <span class="string">"Z"</span>, c = <span class="literal">NA</span>)</span><br><span class="line">unlist(l.ex, recursive = <span class="literal">FALSE</span>)</span><br><span class="line">unlist(l.ex, recursive = <span class="literal">TRUE</span>)</span><br><span class="line"></span><br><span class="line">l1 &lt;- list(a = <span class="string">"a"</span>, b = <span class="number">2</span>, c = pi+<span class="number">2i</span>)</span><br><span class="line">unlist(l1) <span class="comment"># a character vector</span></span><br><span class="line">l2 &lt;- list(a = <span class="string">"a"</span>, b = as.name(<span class="string">"b"</span>), c = pi+<span class="number">2i</span>)</span><br><span class="line">unlist(l2) <span class="comment"># remains a list</span></span><br><span class="line"></span><br><span class="line">ll &lt;- list(as.name(<span class="string">"sinc"</span>), quote( a + b ), <span class="number">1</span>:<span class="number">10</span>, letters, expression(<span class="number">1</span>+x))</span><br><span class="line">utils::str(ll)</span><br><span class="line"><span class="keyword">for</span>(x <span class="keyword">in</span> ll)</span><br><span class="line">  stopifnot(identical(x, unlist(x)))</span><br><span class="line"><span class="comment"># &#125;</span></span><br></pre></td></tr></table></figure>
+<p><a href>官网简介</a></p>
+<hr>
+
+
+
+
+
+<style>
+
+.post-body h3{
+  font-size: 1.6em;
+  border-bottom: 1px solid #eee;
+  color: white;
+  background-color: #406ca4;
+  border-radius: 8px;
+  padding: 6px;
+  padding-left: 20px;
+}
+
+.post-body h4 {
+    /* font-size: 1.2em; */
+    /* font-size: 1.6em; */
+    /* border-bottom: 1px solid #eee; */
+    color: white;
+    background-color: green;
+    border-radius: 8px;
+    padding: 6px;
+    /* padding-left: 20px; */
+}
+
+.post-block {
+    background-color: lightyellow;
+}
+
+</style>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/语法/" rel="tag"><i class="fa fa-tag"></i> 语法</a>
+          
+            <a href="/tags/函数/" rel="tag"><i class="fa fa-tag"></i> 函数</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/09/HTML/html 定位/" rel="next" title="html定位">
+                <i class="fa fa-chevron-left"></i> html定位
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/17/JavaScript/JavaScript 学习 练习Demo/" rel="prev" title="JavaScript  练习Demo">
+                JavaScript  练习Demo <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">秋枫</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#A"><span class="nav-number">1.</span> <span class="nav-text">A</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：Array-concat"><span class="nav-number">1.1.</span> <span class="nav-text">函数：Array.concat</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage"><span class="nav-number">1.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数"><span class="nav-number">1.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明"><span class="nav-number">1.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples"><span class="nav-number">1.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：Array-every"><span class="nav-number">1.2.</span> <span class="nav-text">函数：Array.every</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-1"><span class="nav-number">1.2.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：Array-from"><span class="nav-number">1.3.</span> <span class="nav-text">函数：Array.from()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-2"><span class="nav-number">1.3.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：Array-filter"><span class="nav-number">1.4.</span> <span class="nav-text">函数：Array.filter</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-3"><span class="nav-number">1.4.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-3"><span class="nav-number">1.4.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-3"><span class="nav-number">1.4.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：Array-reduce"><span class="nav-number">1.5.</span> <span class="nav-text">函数：Array.reduce</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-4"><span class="nav-number">1.5.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-4"><span class="nav-number">1.5.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-4"><span class="nav-number">1.5.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-4"><span class="nav-number">1.5.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：Array-prototype-shift"><span class="nav-number">1.6.</span> <span class="nav-text">函数：Array.prototype.shift()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-5"><span class="nav-number">1.6.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-5"><span class="nav-number">1.6.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-5"><span class="nav-number">1.6.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-5"><span class="nav-number">1.6.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：Array-prototype-slice"><span class="nav-number">1.7.</span> <span class="nav-text">函数：Array.prototype.slice()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-6"><span class="nav-number">1.7.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-6"><span class="nav-number">1.7.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-6"><span class="nav-number">1.7.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-6"><span class="nav-number">1.7.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B"><span class="nav-number">2.</span> <span class="nav-text">B</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#b1"><span class="nav-number">2.1.</span> <span class="nav-text">b1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C"><span class="nav-number">3.</span> <span class="nav-text">C</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：chartr"><span class="nav-number">3.1.</span> <span class="nav-text">函数：chartr</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-7"><span class="nav-number">3.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-7"><span class="nav-number">3.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-7"><span class="nav-number">3.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-7"><span class="nav-number">3.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：CRS-class"><span class="nav-number">3.2.</span> <span class="nav-text">函数：CRS-class</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-8"><span class="nav-number">3.2.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-8"><span class="nav-number">3.2.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-8"><span class="nav-number">3.2.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-8"><span class="nav-number">3.2.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：crs"><span class="nav-number">3.3.</span> <span class="nav-text">函数：crs</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-9"><span class="nav-number">3.3.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-9"><span class="nav-number">3.3.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-9"><span class="nav-number">3.3.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-9"><span class="nav-number">3.3.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：cumsum"><span class="nav-number">3.4.</span> <span class="nav-text">函数：cumsum</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-10"><span class="nav-number">3.4.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-10"><span class="nav-number">3.4.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-10"><span class="nav-number">3.4.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-10"><span class="nav-number">3.4.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D"><span class="nav-number">4.</span> <span class="nav-text">D</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：difftime"><span class="nav-number">4.1.</span> <span class="nav-text">函数：difftime</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-11"><span class="nav-number">4.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-11"><span class="nav-number">4.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-11"><span class="nav-number">4.1.3.</span> <span class="nav-text">说明</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：dim"><span class="nav-number">4.2.</span> <span class="nav-text">函数：dim</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-12"><span class="nav-number">4.2.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-12"><span class="nav-number">4.2.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-12"><span class="nav-number">4.2.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-11"><span class="nav-number">4.2.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：dist2Line"><span class="nav-number">4.3.</span> <span class="nav-text">函数：dist2Line</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：distHaversine"><span class="nav-number">4.4.</span> <span class="nav-text">函数：distHaversine</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：distm"><span class="nav-number">4.5.</span> <span class="nav-text">函数：distm</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-13"><span class="nav-number">4.5.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-13"><span class="nav-number">4.5.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-13"><span class="nav-number">4.5.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-12"><span class="nav-number">4.5.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：dtw"><span class="nav-number">4.6.</span> <span class="nav-text">函数：dtw</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F"><span class="nav-number">5.</span> <span class="nav-text">F</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：fix"><span class="nav-number">5.1.</span> <span class="nav-text">函数：fix</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-14"><span class="nav-number">5.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-14"><span class="nav-number">5.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-14"><span class="nav-number">5.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-13"><span class="nav-number">5.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K"><span class="nav-number">6.</span> <span class="nav-text">K</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：kalmanFilter"><span class="nav-number">6.1.</span> <span class="nav-text">函数：kalmanFilter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：Kinhom-Track"><span class="nav-number">6.2.</span> <span class="nav-text">函数：Kinhom.Track</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-15"><span class="nav-number">6.2.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-15"><span class="nav-number">6.2.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-15"><span class="nav-number">6.2.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-14"><span class="nav-number">6.2.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L"><span class="nav-number">7.</span> <span class="nav-text">L</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：LCSS"><span class="nav-number">7.1.</span> <span class="nav-text">函数：LCSS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#N"><span class="nav-number">8.</span> <span class="nav-text">N</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：names"><span class="nav-number">8.1.</span> <span class="nav-text">函数：names</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-16"><span class="nav-number">8.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-16"><span class="nav-number">8.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-16"><span class="nav-number">8.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-15"><span class="nav-number">8.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：Normal-正态"><span class="nav-number">8.2.</span> <span class="nav-text">函数：Normal 正态</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-17"><span class="nav-number">8.2.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-17"><span class="nav-number">8.2.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-17"><span class="nav-number">8.2.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-16"><span class="nav-number">8.2.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M"><span class="nav-number">9.</span> <span class="nav-text">M</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：merge"><span class="nav-number">9.1.</span> <span class="nav-text">函数：merge</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-18"><span class="nav-number">9.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-18"><span class="nav-number">9.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-18"><span class="nav-number">9.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-17"><span class="nav-number">9.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#O"><span class="nav-number">10.</span> <span class="nav-text">O</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：outer"><span class="nav-number">10.1.</span> <span class="nav-text">函数：outer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-19"><span class="nav-number">10.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-19"><span class="nav-number">10.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-19"><span class="nav-number">10.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-18"><span class="nav-number">10.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P"><span class="nav-number">11.</span> <span class="nav-text">P</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：par"><span class="nav-number">11.1.</span> <span class="nav-text">函数：par</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-20"><span class="nav-number">11.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-20"><span class="nav-number">11.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-20"><span class="nav-number">11.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-19"><span class="nav-number">11.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：paste"><span class="nav-number">11.2.</span> <span class="nav-text">函数：paste</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-21"><span class="nav-number">11.2.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-21"><span class="nav-number">11.2.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-21"><span class="nav-number">11.2.3.</span> <span class="nav-text">说明</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Examples-20"><span class="nav-number">11.2.3.1.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：plot"><span class="nav-number">11.3.</span> <span class="nav-text">函数：plot</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-22"><span class="nav-number">11.3.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-22"><span class="nav-number">11.3.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-22"><span class="nav-number">11.3.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-21"><span class="nav-number">11.3.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q"><span class="nav-number">12.</span> <span class="nav-text">Q</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：q1"><span class="nav-number">12.1.</span> <span class="nav-text">函数：q1</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-23"><span class="nav-number">12.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-23"><span class="nav-number">12.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-23"><span class="nav-number">12.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-22"><span class="nav-number">12.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R"><span class="nav-number">13.</span> <span class="nav-text">R</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：rep"><span class="nav-number">13.1.</span> <span class="nav-text">函数：rep</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-24"><span class="nav-number">13.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-24"><span class="nav-number">13.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-24"><span class="nav-number">13.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-23"><span class="nav-number">13.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：rnorm"><span class="nav-number">13.2.</span> <span class="nav-text">函数：rnorm</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-25"><span class="nav-number">13.2.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-25"><span class="nav-number">13.2.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-25"><span class="nav-number">13.2.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-24"><span class="nav-number">13.2.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S"><span class="nav-number">14.</span> <span class="nav-text">S</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：sample"><span class="nav-number">14.1.</span> <span class="nav-text">函数：sample</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-26"><span class="nav-number">14.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-26"><span class="nav-number">14.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-26"><span class="nav-number">14.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-25"><span class="nav-number">14.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：scale"><span class="nav-number">14.2.</span> <span class="nav-text">函数：scale</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-27"><span class="nav-number">14.2.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-27"><span class="nav-number">14.2.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-27"><span class="nav-number">14.2.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-26"><span class="nav-number">14.2.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：seq"><span class="nav-number">14.3.</span> <span class="nav-text">函数：seq</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：sink"><span class="nav-number">14.4.</span> <span class="nav-text">函数：sink</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-28"><span class="nav-number">14.4.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-27"><span class="nav-number">14.4.2.</span> <span class="nav-text">Examples</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-28"><span class="nav-number">14.4.3.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-28"><span class="nav-number">14.4.4.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-29"><span class="nav-number">14.4.5.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-28"><span class="nav-number">14.4.6.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：-stplot"><span class="nav-number">14.5.</span> <span class="nav-text">函数： stplot</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-29"><span class="nav-number">14.5.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-29"><span class="nav-number">14.5.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-30"><span class="nav-number">14.5.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-29"><span class="nav-number">14.5.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T"><span class="nav-number">15.</span> <span class="nav-text">T</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：tracks"><span class="nav-number">15.1.</span> <span class="nav-text">函数：tracks</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-30"><span class="nav-number">15.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-30"><span class="nav-number">15.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-31"><span class="nav-number">15.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-30"><span class="nav-number">15.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#U"><span class="nav-number">16.</span> <span class="nav-text">U</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数：unlist"><span class="nav-number">16.1.</span> <span class="nav-text">函数：unlist</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Usage-31"><span class="nav-number">16.1.1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Arguments-参数-31"><span class="nav-number">16.1.2.</span> <span class="nav-text">Arguments 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#说明-32"><span class="nav-number">16.1.3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Examples-31"><span class="nav-number">16.1.4.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qiu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">159k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:25</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 新增访客统计代码 -->
+
+<div class="busuanzi-count">
+    <script async src="/qiu/busuanzi.pure.mini.js"></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问用户： <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+    <div class="powered-by"></div>
+    <span class="site-uv">
+      <i class="fa fa-eye"></i>
+      访问次数： <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span>
+    <!-- 博客字数统计 -->
+    
+</div>
+<!-- 新增访客统计代码 END-->
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+
+
+		<!-- 点击特效 -->
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="/qiu/js/fireworks/anime.min.js"></script> 
+   <script type="text/javascript" src="/qiu/js/fireworks/fireworks.js"></script><!-- 就是点击特效的 -->
+   
+ 
+	<!-- 看板娘 --> 
+   <script type="text/javascript" src="/qiu/kanbanliang/script.js"></script>
+<canvas id="live2dcanvas" width="150" height="300" class="live2d" style="visibility: visible;"></canvas>
+<style> #live2dcanvas { right:-20px!important;}</style>
+<style>
+      #live2dcanvas {
+        position: fixed;
+        //right: 0px;
+		left: 250px;
+        z-index: 999;
+        pointer-events: none;
+        bottom: -30px;
+      }
+    </style>
+    <script>loadlive2d("live2dcanvas" ,"/qiu/kanbanliang/koharu.model.json")</script> 
+	
+	
+</html>
